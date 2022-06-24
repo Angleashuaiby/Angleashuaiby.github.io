@@ -216,25 +216,25 @@
 </ul>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/nps/conf/nps.conf</span><br></pre></td></tr></table></figure>
 
-<h4 id="1-3-服务web控制端-添加-客户端监听"><a href="#1-3-服务web控制端-添加-客户端监听" class="headerlink" title="1.3 服务web控制端 添加 客户端监听"></a>1.3 服务web控制端 添加 客户端监听</h4><p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1656059128692-6109ff7d-d481-4e73-8232-29958e2f7c6a.png" alt="img"></p>
+<h4 id="1-3-服务web控制端-添加-客户端监听"><a href="#1-3-服务web控制端-添加-客户端监听" class="headerlink" title="1.3 服务web控制端 添加 客户端监听"></a>1.3 服务web控制端 添加 客户端监听</h4><p><img src="https://s2.loli.net/2022/06/24/7PU3wM5BjQ6XO9i.png" alt="image"></p>
 <ul>
 <li>备注：名字</li>
 <li>Basic认证的用户名/密码： Socks代理时需要用到的用户名和密码</li>
 <li>唯一验证秘钥：客户端需要用到的东西，但是留空可以自动生成。</li>
 <li>其他就顾名思义了。</li>
 </ul>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1656059217013-4b59a7ac-0369-4976-b515-32614465d76a.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1656059416702-8fbdcef5-2c41-41f3-84e7-8ac66c635b04.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/06/24/QeUYzFX4Vq693cu.png" alt="image _1_.png"></p>
+<p><img src="https://s2.loli.net/2022/06/24/3c7SqtRawVnkzZ2.png" alt="image _2_.png"></p>
 <p>这个秘钥客户端需要用到</p>
 <hr>
 <h3 id="二、客户端"><a href="#二、客户端" class="headerlink" title="二、客户端"></a>二、客户端</h3><h4 id="2-1-客户端通过秘钥链接"><a href="#2-1-客户端通过秘钥链接" class="headerlink" title="2.1 客户端通过秘钥链接"></a>2.1 客户端通过秘钥链接</h4><p>优点：通过秘钥链接的无需传配置文件信息。</p>
 <p>解压客户端windows主机上的<code>windows_amd64_client.tar.gz</code>，并在CMD中运行命令。</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npc.exe -server=你的nps:8024 -vkey=你的密钥 </span><br><span class="line"> </span><br><span class="line">注：点击web管理中客户端前的+号，即可复制启动命令</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1656059583451-8a57a5da-4de6-41e4-9f4b-7d9a24431a07.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/06/24/QqitM3Rrw1YOk8j.png" alt="image.png"></p>
 <p>如果有连接</p>
 <p>这里会由<code>离线</code>变成<code>在线</code>。此时成功连接。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1656059828078-57218961-21d5-4da9-b19c-939e1578dbc6.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/06/24/IriBAsKSftPwGRy.png" alt="image _1_.png"></p>
 <p>注：连接时，火绒会提示有软件尝试安装。【猜测是临时安装服务器的配置信息】</p>
 <h4 id="2-2客户端通过配置信息连接"><a href="#2-2客户端通过配置信息连接" class="headerlink" title="2.2客户端通过配置信息连接"></a>2.2客户端通过配置信息连接</h4><p>此模式使用nps的公钥或者客户端私钥验证，各种配置在客户端完成，同时服务端web也可以进行管理。</p>
 <p><strong>使用命令：</strong></p>
@@ -245,19 +245,19 @@
 <p><strong>据学习，还是第一种方法要便捷。故此处不作过多介绍。</strong></p>
 <hr>
 <h3 id="三、配置socks5代理进行内网穿透"><a href="#三、配置socks5代理进行内网穿透" class="headerlink" title="三、配置socks5代理进行内网穿透"></a>三、配置socks5代理进行内网穿透</h3><p>要等客户端上线以后在配置Socks代理。连接后，点击隧道按钮——&gt;新增。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1656061218954-f31f642a-08bb-4056-b31b-5b633c856887.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1656061271474-9e942345-8811-4456-a48b-55470035425f.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/06/24/oYp2gh45D3ySrit.png" alt="image _2_.png"></p>
+<p><img src="https://s2.loli.net/2022/06/24/481eQENODHgGulA.png" alt="image _3_.png"></p>
 <ul>
 <li>模式选择 socks代理</li>
 <li>客户端ID 自动选择，如果没有，则看 客户端列表 连接的ID。此处为4</li>
 <li>备注留空</li>
 <li>服务端端口就是各种代理器去访问的端口。此处为8083。</li>
 </ul>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1656061406167-8368abcf-63ca-4e72-ad7f-f7cf9407c4fa.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1656061424067-eded802e-691e-4ed1-b779-466449bc7376.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/06/24/pahLe9cDYr2Cib4.png" alt="image _4_.png"></p>
+<p><img src="https://s2.loli.net/2022/06/24/7mP5heLrH1YD9zV.png" alt="image _5_.png"></p>
 <p>此时，使用Proxifier进行尝试。就成了。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1656061780248-818eaa85-2571-4bf2-a246-413170bfed07.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1656061734245-98986bb7-cc1f-493b-b00b-47c28adeb51f.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/06/24/NPqIHTCcR6DGYVZ.png" alt="image _6_.png"></p>
+<p>!<img src="https://s2.loli.net/2022/06/24/APqOcS5btFif4BU.png" alt="image _7_.png"></p>
 
         </div>
 
