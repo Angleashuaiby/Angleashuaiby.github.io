@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Angleashuaiby">
+    
+    <title>
+        
+            linux后门排查笔记 |
+        
+        Angleashuaiby&#39;s note
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.jpg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"angleashuaiby.github.io","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/touxiang.jpg","favicon":"/images/logo.jpg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"站在巨人的肩膀上学习."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"0.0.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Angleashuaiby&#39;s note
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">linux后门排查笔记</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/touxiang.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Angleashuaiby</span>
+                        
+                            <span class="author-label">Lv1</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-07-21 11:35:33</span>
+        <span class="mobile">2022-07-21 11:35</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/%E5%BA%94%E6%80%A5%E5%93%8D%E5%BA%94/">应急响应</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>别灰心， 人生就是这样起起落落落落落落落落落落落</p>
+<span id="more"></span>
+
+<hr>
+<p>在服务器被入侵后进行应急响应无非通过网络排查、进程排查、文件排查、系统信息排查等方法进行入侵排查。在此对Linux操作系统排查的常用命令进行记录汇总，方便日后排查时使用。</p>
+<h3 id="0x00-网络排查"><a href="#0x00-网络排查" class="headerlink" title="0x00 网络排查"></a>0x00 网络排查</h3><p>查看是否存在可疑网络连接</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">netstat -antpl|more</span><br></pre></td></tr></table></figure>
+
+<p>开启服务检查（常用于判断开启哪种web服务）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl | grep -E &quot;\.service.*running&quot;</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="0x01-进程排查"><a href="#0x01-进程排查" class="headerlink" title="0x01 进程排查"></a>0x01 进程排查</h3><p>使用ps命令列出系统中当前运行的那些进程。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ps -ef | more  或者 ps -aux |more</span><br></pre></td></tr></table></figure>
+
+<p>通过top命令显示系统中各个进程的资源占用状况，利于发现挖矿病毒</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">top</span><br></pre></td></tr></table></figure>
+
+<p>如发现异常，可使用一下命令进一步排查。可用一些查询命令，或查看/proc文件夹：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">pwdx $PID  或  ls -l /proc/$PID/exe    #查看下pid所对应的进程文件路径</span><br><span class="line">ps eho command -p $PID 或 cat /proc/$PID/cmdline    #查看该进程启动的完整命令行</span><br><span class="line">readlink /proc/$PID/cwd    #查看该进程启动时候所在的目录</span><br><span class="line">cat /proc/$PID/status    #查看该进程状态信息，比stat/statm更具可读性</span><br><span class="line">strings -f /proc/1461/environ | cut -f2 -d &#x27;&#x27;    #查看该进程启动时的完整环境变量</span><br><span class="line">lsof -p $PID    #列出该进程所打开的所有文件</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="0x02-系统信息排查"><a href="#0x02-系统信息排查" class="headerlink" title="0x02 系统信息排查"></a>0x02 系统信息排查</h3><p>历史命令查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">history|more</span><br><span class="line">more /root/.bash_history</span><br></pre></td></tr></table></figure>
+
+<p>登录信息查询</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">who 查看当前登录用户（tty本地登陆 pts远程登录）</span><br><span class="line">w 查看系统信息，想知道某一时刻用户的行为</span><br><span class="line">last 列出所有用户登陆信息</span><br><span class="line">lastb 列出所有用户登陆失败的信息</span><br><span class="line">lastlog 列出所有用户最近一次登录信息</span><br></pre></td></tr></table></figure>
+
+<p>查看系统启动项，是否存在可疑启动项</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl list-unit-files --type=service | grep &quot;enabled&quot;</span><br></pre></td></tr></table></figure>
+
+<p>检查开机启动项</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more /etc/rc.local</span><br></pre></td></tr></table></figure>
+
+<p>检查计划任务</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">crontab -l</span><br><span class="line">more /etc/crontab</span><br><span class="line">ls -al /var/spool/cron/</span><br><span class="line"></span><br><span class="line">more/etc/anacrontab				</span><br><span class="line">ls -al /var/spool/anacron/*</span><br><span class="line">注：#anacron 会以 1 天、1周（7天）、一个月作为检测周期，判断是否有定时任务在关机之后没有执行。如果有这样的任务，那么 anacron 会在特定的时间重新执行这些定时任务。</span><br></pre></td></tr></table></figure>
+
+<p>检查有无新添账号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>是否有 UID 相同的用户（账号克隆）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">awk -F: &#x27;&#123;a[$3]++&#125;END&#123;for(i in a)if(a[i]&gt;1)print i&#125;&#x27; /etc/passwd</span><br></pre></td></tr></table></figure>
+
+<p>检查<code>/etc/passwd</code> 文件里用户结尾是否有<code>/bin/bash 或/bin/sh</code>，即查看可以执行命令的用户。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat /etc/passwd | grep -E &quot;/bin/(bash|sh)$&quot; | awk -F: &#x27;&#123;print $1&#125;&#x27;</span><br></pre></td></tr></table></figure>
+
+<p>查看有无空口令账户</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gawk -F: &#x27;($2==&quot;&quot;) &#123;print $1&#125;&#x27; /etc/shadow</span><br></pre></td></tr></table></figure>
+
+<p>顺便排查ssh是否允许空口令登录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more /etc/ssh/sshd_config |grep PermitEmptyPassword</span><br></pre></td></tr></table></figure>
+
+<p>检查拥有sudo权限的账号</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">more /etc/sudoers | grep -v &quot;^#\|^$&quot; | grep &quot;ALL=(ALL)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>查找SUID / SGID设置的文件（多用于防止用户越权）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SUID： find . -perm /4000 </span><br><span class="line">SGID： find . -perm /2000</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="0x03-文件排查"><a href="#0x03-文件排查" class="headerlink" title="0x03 文件排查"></a>0x03 文件排查</h3><p><strong>webshell木马文件查找技巧</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">查询高权限的常见木马后缀文件:</span><br><span class="line">find /var/www -name *.jsp* -perm 777   #或者jsp换成ph*/as*</span><br><span class="line"></span><br><span class="line">查找七天内被修改的以 php 为后缀的文件:</span><br><span class="line">find /var/www -mtime -7 -iname &quot;*.php&quot; | xargs ls -alt</span><br></pre></td></tr></table></figure>
+
+<p><strong>ssh秘钥排查：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cd /root/.ssh &amp;&amp;  ls -al</span><br><span class="line">more /root/.ssh/authorized_keys</span><br></pre></td></tr></table></figure>
+
+<p><strong>文件完整性排查</strong></p>
+<p>主要侧重系统关键文件，因为是 rootkit 常用的手段，替换关键文件，进行隐藏等，如 <code>ifconfig/ls/cat</code>等</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">排查方法：查找文件位置，并计算 MD5 提交威胁情报平台检查</span><br><span class="line">whereis ifconfig</span><br><span class="line">md5sum  /usr/sbin/ifconfig </span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="0x03-日志排查"><a href="#0x03-日志排查" class="headerlink" title="0x03 日志排查"></a>0x03 日志排查</h3><ul>
+<li>/var/log/secure                记录大多数应用输入的账号与密码，登录成功与否。一般我们需要重点去关注secure安全日志，检查系统错误登陆日志，统计IP重试次数，成功登录的时间、用户名和ip，确认账号是否存在暴力破解或异常登录的情况。</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">登录成功</span><br><span class="line">more /var/log/secure* | grep &quot;Accepted password&quot;  或者 last 命令</span><br><span class="line">登录失败</span><br><span class="line">more /var/log/secure* | grep &quot;Failed password&quot;	或者 lastb 命令</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>其他的日志信息排查</li>
+</ul>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/var/log/message      包括整体系统信息</span><br><span class="line">/var/log/auth.log       含系统授权信息，包括用户登录和使用的权限机制等</span><br><span class="line">/var/log/userlog        记录所有等级用户信息的日志</span><br><span class="line">/var/log/cron         记录crontab命令是否被正确的执行</span><br><span class="line">/var/log/vsftpd.log      记录Linux FTP日志</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="0x04-其他后门排查"><a href="#0x04-其他后门排查" class="headerlink" title="0x04 其他后门排查"></a>0x04 其他后门排查</h3><p>检查strace键盘记录工具</p>
+<p><code>strace</code>是一个动态跟踪工具，它可以跟踪系统调用的执行。恶意攻击者可以把他当成一个键盘记录的后门，来扩大我们的信息收集范围</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用 alias 命令即可发现异常。</span><br></pre></td></tr></table></figure>
+
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/07/04/2022/python%E5%85%8D%E6%9D%80shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">python免杀shellcode加载器</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Angleashuaiby</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v0.0.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#0x00-%E7%BD%91%E7%BB%9C%E6%8E%92%E6%9F%A5"><span class="nav-text">0x00 网络排查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x01-%E8%BF%9B%E7%A8%8B%E6%8E%92%E6%9F%A5"><span class="nav-text">0x01 进程排查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x02-%E7%B3%BB%E7%BB%9F%E4%BF%A1%E6%81%AF%E6%8E%92%E6%9F%A5"><span class="nav-text">0x02 系统信息排查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x03-%E6%96%87%E4%BB%B6%E6%8E%92%E6%9F%A5"><span class="nav-text">0x03 文件排查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x03-%E6%97%A5%E5%BF%97%E6%8E%92%E6%9F%A5"><span class="nav-text">0x03 日志排查</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#0x04-%E5%85%B6%E4%BB%96%E5%90%8E%E9%97%A8%E6%8E%92%E6%9F%A5"><span class="nav-text">0x04 其他后门排查</span></a></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
