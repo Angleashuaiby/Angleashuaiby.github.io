@@ -206,17 +206,17 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -inform der -subject_hash_old -in bp.cer</span><br></pre></td></tr></table></figure>
 
 <p>结果如下：我们记住这个9a5ba575等会儿用得到</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/1285900/1620700265693-a5c38836-525d-4e0c-939d-035adced50c9.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/vhHcT4DJORxX5eZ.png" alt="image.png"></p>
 <p>3、执行如下命令（如果你的文件名跟我的不一致，请替换哦）：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openssl x509 -inform der -text -in bp.cer -out 9a5ba575.0</span><br></pre></td></tr></table></figure>
 
 <p>会生成9a5ba575.0文件，内容如下：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/1285900/1624430554454-97f61d1f-00fe-417c-a46c-9f29d01e4785.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/6qysdiQHvCN5RJj.png" alt="image _1_.png"></p>
 <p>4、将文件复制到本机中，并将 —–BEGIN CERTIFICATE—– 后面的所有内容移动到最开始</p>
 <p>移动前：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/1285900/1624430835836-7ad27e1a-6d31-474f-a448-6eaefe3ab645.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/dMo46wihyA5NxFH.png" alt="image _2_.png"></p>
 <p>移动后：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/1285900/1624430855872-fd9d7ab0-2ef1-41f5-8b64-2101e37e5cea.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/Zk3Xau26slARYJe.png" alt="image _3_.png"></p>
 <p>5、使用adb将证书移动到夜神中：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">查看当前连接设备：</span><br><span class="line">adb devices</span><br><span class="line">连接手机，执行adb</span><br><span class="line">adb push &lt;hash&gt;.0 /system/etc/security/cacerts</span><br><span class="line">加上权限adb shell chmod 644 /system/etc/security/cacerts/&lt;hash&gt;.0</span><br><span class="line">重启手机，查看证书是否安装完成。</span><br></pre></td></tr></table></figure>
 
@@ -224,7 +224,7 @@
 <p>解决方法：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">adb root</span><br><span class="line">adb remount</span><br><span class="line">重新加载文件系统，改变文件夹权限，然后重新push,问题解决。</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2021/png/1285900/1624432553166-217f0758-a7e6-4034-8e9a-483dd5c8b05f.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/eRylhKmrtO9k1MF.png" alt="image _4_.png"></p>
 
         </div>
 

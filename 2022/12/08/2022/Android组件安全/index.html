@@ -227,7 +227,7 @@
 <p>恶意应用将启动自己仿冒的界面覆盖原界面.用户在毫无察觉的情况下输入登录信息,恶意程序在把获取的数据返回给服务端</p>
 <p><strong>测试过程</strong></p>
 <p>安装 HijackActivity.apk,选中想要劫持应用的包名.然后启动目标应用。查看结果</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491079136-b440fe43-f2c1-4e6d-9415-340ac8d00794.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/1Kfso3rHptRFECj.png" alt="image-20221206214742892.png"></p>
 <p><strong>漏洞建议</strong></p>
 <p>在 Activity 的 OnPause 函数中加入提示信息,每当 Activity 切换到后台的时候给出提示信息 使用外部产品进行防护。</p>
 <hr>
@@ -264,7 +264,7 @@
 <li>找出动态注册的 Broadcast receiver：</li>
 </ol>
 <p>通过反编译 apk 文件，获得源码，搜索 <code>registerReceiver</code>。eg：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491138408-0d2f900b-1cbc-4162-9c55-3b6da5bfca51.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/3bXYavIxi6m2qPk.png" alt="image-20221206220653049.png"></p>
 <ol>
 <li>找出发送广播：</li>
 </ol>
@@ -296,17 +296,17 @@
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">使用drozer</span><br><span class="line">	run app.provider.finduri [包名]</span><br><span class="line">注：drozer 工具，只是在 dex 文件和 AndroidManifest.xml 中搜索字符串，会出现漏报。</span><br></pre></td></tr></table></figure>
 
-<p>方法二：<br>    编译 apk 文件，在代码中查找 UriMatcher.addURI ，并手动拼接 uri。eg：<img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491196518-22db3274-5b66-4b4a-8b1b-9e2988525ce0.png" alt="img"></p>
+<p>方法二：<br>    编译 apk 文件，在代码中查找 UriMatcher.addURI ，并手动拼接 uri。eg：<img src="https://s2.loli.net/2022/12/08/LtyGeDwxsvjRTni.png" alt="image-20221206213118551.png"></p>
 <ol>
 <li> 找到URI后，在 AndroidManifest.xml 查看 是否对所有路径进行了限制。 </li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491214363-4508a838-4763-45cb-9dbb-7ca78d5f48f7.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/s1PgZTncIv3f8y2.png" alt="image-20221206213707144.png"></p>
 <ol>
 <li>验证未限制的URI：</li>
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用drozer：</span><br><span class="line">	run app.provider.query [扫描出来的URI]  //根据扫描出来的URI，进行访问，查看是否可以看到一些敏感信息。</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491257459-b6fbd569-f5c0-4b8f-99b5-1e36221e63dc.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/meqy541R7FrWgkU.png" alt="image-20221206213830961.png"></p>
 <p>出现敏感数据即为漏洞。</p>
 <p><strong>漏洞描述</strong></p>
 <p>Content Provider是安卓应用组件，以表格的形式把数据展现给外部的应用。每个Content Provider都对应一个以”content://”开头的特定URI，任何应用都可以通过这个URI操作Content Provider 应用的数据库。如果应用对权限控制不当就会造成信息泄露。</p>
@@ -318,8 +318,8 @@
 <h4 id="4-2-高-Provider-数据参数常规渗透"><a href="#4-2-高-Provider-数据参数常规渗透" class="headerlink" title="4.2 [高] Provider 数据参数常规渗透"></a>4.2 [高] Provider 数据参数常规渗透</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用drozer：</span><br><span class="line">	run app.provider.query &quot;URI&quot;  来验证</span><br></pre></td></tr></table></figure>
 
 <p>当发现drozer验证URI 未报权限错误时，即可把URI的参数当成常规参数来进行日常渗透。eg：</p>
-<h5 id="4-2-1-SQL注入"><a href="#4-2-1-SQL注入" class="headerlink" title="4.2.1 SQL注入"></a>4.2.1 SQL注入</h5><p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491291495-2cf980fd-f6bb-4a44-b5bd-5f505413abea.png" alt="img"></p>
-<h5 id="4-2-2-任意文件读取"><a href="#4-2-2-任意文件读取" class="headerlink" title="4.2.2 任意文件读取"></a>4.2.2 任意文件读取</h5><p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491307506-ef8c56f2-42ac-4731-b15d-220b50e69e11.png" alt="img"></p>
+<h5 id="4-2-1-SQL注入"><a href="#4-2-1-SQL注入" class="headerlink" title="4.2.1 SQL注入"></a>4.2.1 SQL注入</h5><p><img src="https://s2.loli.net/2022/12/08/NhX9MdeDO8JvB6n.png" alt="image-20221206215624769.png"></p>
+<h5 id="4-2-2-任意文件读取"><a href="#4-2-2-任意文件读取" class="headerlink" title="4.2.2 任意文件读取"></a>4.2.2 任意文件读取</h5><p><img src="https://s2.loli.net/2022/12/08/xApKNjmYegnZDiV.png" alt="image-20221206215658234.png"></p>
 <hr>
 <h3 id="附一、Webview-组件安全检测"><a href="#附一、Webview-组件安全检测" class="headerlink" title="附一、Webview 组件安全检测"></a>附一、Webview 组件安全检测</h3><p>WebView 是 Android 系统定义的一个的控件，其继承自 AbsoluteLayout，相当于一个微型的浏览器，可以用来显示网页、执行 JavaScript 等。</p>
 <h4 id="1-1-高-Webview-远程代码执行漏洞检测"><a href="#1-1-高-Webview-远程代码执行漏洞检测" class="headerlink" title="1.1 [高] Webview 远程代码执行漏洞检测"></a>1.1 [高] Webview 远程代码执行漏洞检测</h4><p><strong>检测方法</strong></p>
@@ -328,7 +328,7 @@
 </ol>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">方法一：使用drozer:</span><br><span class="line">	run app.package.manifest [包名]</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491331998-0441aef8-dddb-4181-b09c-8a3304dcb8fa.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/pP3JlymiKfZRdTa.png" alt="image-20221207113352542.png"></p>
 <ol>
 <li>反编译源代码。静态代码扫描加人工复核的方式</li>
 </ol>
@@ -346,15 +346,15 @@
 <ol>
 <li>反编译，查看源码。<code>WebViewActivity.java</code></li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491364321-20eb0f4e-5c68-48be-9ded-9d164ad496c4.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/dziQsr2pmN8cUCL.png" alt="image-20221207150548596.png"></p>
 <ol>
 <li>查看 <code>setAllowFileAccess</code> 属性值        #该方法来控制<code>WebView</code>是否能够访问本地html文件</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491378523-9c64f82d-870a-4741-a10e-36d0b066fbfd.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/l6JQVjhwcW7tETu.png" alt="image-20221207150631498.png"></p>
 <ol>
 <li>查看 <code>setAllowFileAccessFromFileURLS()</code>        #该方法决定是否允许JS使用file域访问本地文件。此功能破坏了同源策略SOP的限制。</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491401772-a53f42d6-c584-4ce2-bf67-34f75051f611.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/fcEyVB3PgpNdOeS.png" alt="image-20221207150643929.png"></p>
 <p><strong>漏洞描述</strong></p>
 <p>JavaScript的延时执行能够绕过file协议的同源检查，并能够访问受害应用的所有私有文件，即通过WebView对Javascript的延时执行和将当前Html文件删除掉并软连接指向其他文件就可以读取到被符号链接所指的文件，然后通过JavaScript再次读取HTML文件，即可获取到被符号链接所指的文件。大多数使用WebView的应用都会受到该漏洞的影响，恶意应用通过该漏洞，可在无特殊权限下盗取应用的任意私有文件，尤其是浏览器，可通过利用该漏洞，获取到浏览器所保存的密码、Cookie、收藏夹以及历史记录等敏感信息，从而造成敏感信息泄露。</p>
 <p><strong>漏洞建议</strong></p>
@@ -368,7 +368,7 @@
 <ol>
 <li>反编译，查看源码。遍历查询调用了<code>setSavePassword</code> 的函数路径，然后再获取函数参数值，判断参数值是否为true。<br>中风险：代码中未调用<code>setSavePassword(false)</code>，或设置<code>setSavePassword(ture)</code>；<br>无风险：代码中调用<code>setSavePassword(false)</code>。</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491450931-04feed39-fb05-46c2-9c5a-1bcf4a40d982.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/sjpk35yPNOYTlce.png" alt="image-20221208161040080.png"></p>
 <p><strong>漏洞描述</strong></p>
 <p>webview 的保存密码功能默认设置为 true。在使用WebView的过程中忽略了WebView setSavePassword，当用户选择保存在WebView中输入的用户名和密码，则会被明文保存到应用数据目录的databases/WebView.db中。如果手机被root就可以获取明文保存的密码，造成用户的个人敏感数据泄露。</p>
 <p><strong>漏洞建议</strong></p>

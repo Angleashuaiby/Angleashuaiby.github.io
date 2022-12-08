@@ -206,35 +206,35 @@
 <h4 id="使用方法："><a href="#使用方法：" class="headerlink" title="使用方法："></a>使用方法：</h4><ol>
 <li>将apk包解压缩，里面有<code>classes.dex</code>，如图所示</li>
 </ol>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670296194303-370a6792-da8e-4b7f-a07f-87e090829050.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/ePxIAOk3lMQpoqj.png" alt="image.png"></p>
 <ol>
 <li>将 <code>classes.dex</code>文件放到dex2jar目录中</li>
 </ol>
 <p>一定要这么放，不能将<code>d2j-dex2jar.bat</code>文件拿出运行。会报错。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670296250463-cced2b18-0fe7-4811-a3e1-e532640bb5f6.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/dnSrwR1yxpFNO4o.png" alt="image _1_.png"></p>
 <ol>
 <li>在dex2jar目录 中运行命令：</li>
 </ol>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">d2j-dex2jar.bat classes.dex</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670296349747-66db267e-44a7-4c92-b923-cae8753017fd.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/BZ6PDdGj21aTqvO.png" alt="image _2_.png"></p>
 <p>即可获得 逆向后的jar包。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670296377295-ad032890-b01b-43d1-b4cf-b956add08da6.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/MkI2pj8bAHCL4EY.png" alt="image _3_.png"></p>
 <hr>
 <h3 id="二、jd-gui"><a href="#二、jd-gui" class="headerlink" title="二、jd-gui"></a>二、<strong>jd-gui</strong></h3><p><strong>查看反编译的jar包 源码</strong></p>
 <p>官网链接：<a class="link"   target="_blank" rel="noopener" href="https://github.com/java-decompiler/jd-gui" >https://github.com/java-decompiler/jd-gui<i class="fas fa-external-link-alt"></i></a></p>
 <p>可加载jar文件通过java 打开。</p>
 <p>也可直接下载windows可执行文件。</p>
 <p>看到源码后，保存所有源代码，格式为zip。解压缩后 通过VScode打开项目。即可详细查看。</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670296965074-5cbefbfb-b671-4af5-97d8-d2fc3922950c.png" alt="img"></p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670297024419-2baeccbb-c9f6-46b3-b5b1-effe36456494.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/M1F5CLPQGaJhxTR.png" alt="image _4_.png"></p>
+<p><img src="https://s2.loli.net/2022/12/08/fqNROQz2VrJ9FpU.png" alt="image _5_.png"></p>
 <hr>
 <h3 id="三、apktool-反编译"><a href="#三、apktool-反编译" class="headerlink" title="三、apktool 反编译"></a>三、apktool 反编译</h3><p><strong>可查看apk包里xml文件以及smail文件。 同时也可以使用apktool重新编译apk包。</strong></p>
 <p>官网链接：<a class="link"   target="_blank" rel="noopener" href="https://github.com/iBotPeaches/Apktool" >https://github.com/iBotPeaches/Apktool<i class="fas fa-external-link-alt"></i></a></p>
 <p>cmd命令如下</p>
 <figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java -jar .\apktool_2.7.0.jar d 【安装包名】-o 【输出的文件夹】</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670297977568-64ac530a-e264-4c4d-8635-114d3da8638a.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/V3uQfYbkjItUysD.png" alt="image _6_.png"></p>
 <p>无任何报错即可。</p>
 
         </div>

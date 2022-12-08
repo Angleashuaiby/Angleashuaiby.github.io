@@ -204,13 +204,13 @@
 <h3 id="高-Debuggable-配置检测"><a href="#高-Debuggable-配置检测" class="headerlink" title="[高] Debuggable 配置检测"></a>[高] <strong>Debuggable</strong> 配置检测</h3><h4 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>该项被打开，app 存在被恶意程序调试的风险，可能导致泄露敏感信息等问题。</p>
 <h4 id="测试过程"><a href="#测试过程" class="headerlink" title="测试过程"></a>测试过程</h4><p>查看 <code>AndroidManifest</code> 中的 <code>Debuggable</code> 项。若为<code>True</code>。则存在漏洞。</p>
 <p>漏洞代码段：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490481216-f4ee2eed-07ab-416a-894b-b2b0dccb7d43.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/OLHgaRJlUMbFmEn.png" alt="image-20221206155804791.png"></p>
 <h4 id="漏洞建议"><a href="#漏洞建议" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>不设置 debuggable 选项，或者将其设置成 false，推荐使用后面一种。</p>
 <hr>
 <h3 id="高-allowbackup备份检测"><a href="#高-allowbackup备份检测" class="headerlink" title="[高] allowbackup备份检测"></a>[高] allowbackup备份检测</h3><h4 id="漏洞描述-1"><a href="#漏洞描述-1" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>被测应用的AndroidManifest.xml文件中allowBackup属性值被设置为true，可通过adb backup对应用数据进行备份，在无root的情况下可以导出应用中存储的所有数据，造成用户数据泄露。</p>
 <h4 id="测试过程-1"><a href="#测试过程-1" class="headerlink" title="测试过程"></a>测试过程</h4><p>查看 <code>AndroidManifest</code> 中的 <code>allowBackup</code> 项。若为<code>True</code>。则存在漏洞。    </p>
 <p>无漏洞代码段：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490773932-e9d1d66a-41d3-4a51-ae67-25ffec2c4e29.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/O1STCtKzZXgDhNM.png" alt="image-20221208171227792.png"></p>
 <h4 id="漏洞建议-1"><a href="#漏洞建议-1" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><ol>
 <li> 将AndroidManifest.xml文件下Allowbackup属性设置为false； </li>
 <li> 使用良好加密，例如启动应用时计算设备唯一标识，从服务端获取对应密钥后解密本地配置。 </li>
@@ -221,7 +221,7 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. android.permission.WRITE_SETTINGS		#允许程序读取或写入系统设置</span><br><span class="line">2. android.permission.INSTALL_PACKAGES		#允许一个程序安装packages</span><br><span class="line">3. android.permission.MOUNT_FORMAT_FILESYSTEMS		#格式化可移动文件系统，比如格式化清空SD卡</span><br><span class="line">4. android.permission.MOUNT_UNMOUNT_FILESYSTEMS		#允许挂载和反挂载文件系统可移动存储</span><br><span class="line">5. android.permission.RESTART_PACKAGES		#允许程序重新启动其他程序。</span><br><span class="line">注：android.permission.REQUEST_INSTALL_PACKAGES 是新增未知来源安装权限。暂不算危险漏洞</span><br></pre></td></tr></table></figure>
 
 <p>漏洞代码段：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490817669-3b0eb70f-14b0-43ca-afc8-9041cc0fa7f1.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/FPtxq8znpwILaKQ.png" alt="image-20221206150935316.png"></p>
 <h4 id="漏洞建议-2"><a href="#漏洞建议-2" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>根据业务需求，如非必要，移除这些高级别权限。</p>
 <h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><ul>
 <li><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/fnlingnzb-learner/p/7239614.html" >Android权限操作之uses-permission详解<i class="fas fa-external-link-alt"></i></a></li>
@@ -231,7 +231,7 @@
 <h3 id="低-非必要权限检测"><a href="#低-非必要权限检测" class="headerlink" title="[低] 非必要权限检测"></a>[低] 非必要权限检测</h3><h4 id="漏洞描述-3"><a href="#漏洞描述-3" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>该权限是使在模拟器中使用，用于获取模拟定位信息。</p>
 <h4 id="测试过程-3"><a href="#测试过程-3" class="headerlink" title="测试过程"></a>测试过程</h4><p>检查是否在正式环境中存在该权限 <code>android permission ACCESS MOCKLOCATION</code>权限</p>
 <p>漏洞代码段：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490852288-f255744b-8df6-4321-bfe3-a5d697a20ec5.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/uASWHF7XcmCdEOj.png" alt="image-20221206160050192.png"></p>
 <h4 id="漏洞建议-3"><a href="#漏洞建议-3" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>移除 android.permission.ACCESS_MOCK_LOCATION 权限。</p>
 <hr>
 <h3 id="低-PermissionGroup-检测"><a href="#低-PermissionGroup-检测" class="headerlink" title="[低] PermissionGroup 检测"></a>[低] <code>PermissionGroup</code> 检测</h3><h4 id="漏洞描述-4"><a href="#漏洞描述-4" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>PermissionGroup 可以对 permission 进行一个逻辑上的分组。如果PermissionGroup 的属性为空，会导致权限定义无效，且其他app 无法使用该权限</p>
@@ -239,7 +239,7 @@
 <p>如果系统使用了<code>PermissionGroup</code>。但<code>protectionlevel</code> 为 <code>normal</code>或 <code>dangerous</code> 或者未设置 <code>protectionLevel</code>。均认为不安全并标注问题的代码段。</p>
 <p>未设置 <code>protectionLevel</code>，默认情况下，<code>permission</code> 的<code>protectionLevel</code> 为 <code>normal</code>。</p>
 <p>漏洞代码段：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490876636-ce7d84ce-3da3-4946-9c8a-ac96ed296d3d.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/besKEAYJr4GNtqn.png" alt="image-20221206153423802.png"></p>
 <h4 id="漏洞建议-4"><a href="#漏洞建议-4" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>设置 PermissionGroup 属性值或者不使用 PermissionGroup。</p>
 <hr>
 <h3 id="低-应用中的ProtectionLevel-检测"><a href="#低-应用中的ProtectionLevel-检测" class="headerlink" title="[低] 应用中的ProtectionLevel 检测"></a>[低] 应用中的<code>ProtectionLevel</code> 检测</h3><h4 id="漏洞描述-5"><a href="#漏洞描述-5" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>对 app 的自定义 permission 的 protectionLevel 属性设置不当，会导致组件（如：content provider）数据泄露危险。最好的权限设置应为”signature”或”signatureOrSystem”，进而避免被第三方应用利用。</p>
@@ -247,7 +247,7 @@
 <p>如果应用中的<code>permission</code> 的<code>protectionlevel</code> 为 <code>normal</code>或 <code>dangerous</code> 或者未设置 <code>protectionLevel</code>。均认为不安全并标注问题的代码段。</p>
 <p>未设置 <code>protectionLevel</code>，默认情况下，<code>permission</code> 的<code>protectionLevel</code> 为 <code>normal</code>。</p>
 <p>漏洞代码段：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490904496-193403c9-058d-4e33-8b0c-334f0403aca8.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/lezTAXU9gVQ6N47.png" alt="image-20221206154530761.png"></p>
 <h4 id="漏洞建议-5"><a href="#漏洞建议-5" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>注意使用”signature”或”signatureOrSystem”防止其他 app 注册或接受该 app 的消息，提高安全性</p>
 <hr>
 <h3 id="低-shareUserid-检测"><a href="#低-shareUserid-检测" class="headerlink" title="[低] shareUserid 检测"></a>[低] shareUserid 检测</h3><h4 id="漏洞描述-6"><a href="#漏洞描述-6" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>通过 sharedUserId，可以让拥有同一个 User Id 的多个 apk 运行在同一个进程中，互相访问任意资源。</p>
@@ -258,14 +258,14 @@
 <li>若 minSdkVersion &gt;19 则是提醒</li>
 </ul>
 <p>漏洞代码段：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490929977-5e818416-0054-46d3-8b26-aedc5aade10b.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/vKJga8L5jldmqtp.png" alt="image-20221206155444754.png"></p>
 <h4 id="漏洞建议-6"><a href="#漏洞建议-6" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>采用 API 等级高于 19 的系统。若非特殊的需求，一般不会将sharedUserId 设置为 android.uid.system。</p>
 <hr>
 <h3 id="低-app-最低版本检测"><a href="#低-app-最低版本检测" class="headerlink" title="[低] app 最低版本检测"></a>[低] app 最低版本检测</h3><h4 id="漏洞描述-7"><a href="#漏洞描述-7" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>攻击者根据版本已知漏洞，对应用进行调试，破解，逆向等相关操作</p>
 <h4 id="测试过程-7"><a href="#测试过程-7" class="headerlink" title="测试过程"></a>测试过程</h4><p>查看 app 所支持的最低版本的系统 api。</p>
 <p>检测<code>app/build.gradle</code> 中的 <code>minSdkVersion</code> 确定 APP 所支持的最低版本的系统 API，对应到相应的 Android 版本上.</p>
 <p>漏洞代码段：</p>
-<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490959853-115ff8d3-547c-401e-b7cd-7c05ec0d3405.png" alt="img"></p>
+<p><img src="https://s2.loli.net/2022/12/08/1zyNqdIaDHVwASM.png" alt="image-20221206160524933.png"></p>
 <h4 id="漏洞建议-7"><a href="#漏洞建议-7" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>罗列出跟最低版本相关的漏洞和 bug，提醒开发者注意自己应用支持的最低版本的系统可能存在的问题。</p>
 
         </div>
