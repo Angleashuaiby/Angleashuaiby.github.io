@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Angleashuaiby">
+    
+    <title>
+        
+            Android组件安全 |
+        
+        Angleashuaiby&#39;s note
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.jpg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"angleashuaiby.github.io","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/touxiang.jpg","favicon":"/images/logo.jpg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"站在巨人的肩膀上学习."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"0.0.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Angleashuaiby&#39;s note
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">Android组件安全</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/touxiang.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Angleashuaiby</span>
+                        
+                            <span class="author-label">Lv2</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-12-08 17:42:55</span>
+        <span class="mobile">2022-12-08 17:42</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/app%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">app渗透测试</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>3.2k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>11 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>生活其实也很简单，喜欢的就争取，得到的就珍惜，失去了就忘记。</p>
+<span id="more"></span>
+
+<hr>
+<h3 id="一、Activity组件"><a href="#一、Activity组件" class="headerlink" title="一、Activity组件"></a>一、Activity组件</h3><p>Activity 是 Android 定义的四大组件之一，也是最重要使用最多的组件。Activity 用来提供一个用户与应用交互的界面。</p>
+<p>Activity 的大部分安全问题都是由于导出造成的【导出状态：可以被其他 APP 调用】。</p>
+<p><strong>学习链接：</strong><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwMjg1NTI2Nw==&mid=2650519924&idx=1&sn=13b65a85db43272304519a67fcab18c7&chksm=82cb0178b5bc886eddb5470f2cd2672c682e97be4bf1a72a189f723ba36943ffd6fc78b25b59&scene=21#wechat_redirect"><strong>《Android Activity安全》——安卓APP安全测试</strong></a></p>
+<h4 id="1-1-高-Activity-越权访问"><a href="#1-1-高-Activity-越权访问" class="headerlink" title="1.1 [高]Activity 越权访问"></a>1.1 [高]Activity 越权访问</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用drozer</span><br><span class="line">1、run app.activity.info –a  [包名]     //可以列出导出的 Activity，以及所需要的权限。</span><br><span class="line">找到对外的Activity组件后,运行：</span><br><span class="line">2、run app.activity.start --component [包名] [敏感Activity组件名]</span><br></pre></td></tr></table></figure>
+
+<p>若测试中，发现越权访问的页面则存在 Activity 越权访问漏洞。</p>
+<p><strong>漏洞描述</strong></p>
+<p>开发者为方便外部调用，会把 Activity 组件设置为导出状态。如果由于开发者的疏忽，把一些包含用户敏感信息或可进行敏感操作的组件设置为导出状态。攻击者就可以利用此漏洞，越权查看敏感信息泄露以及越权操作等安全风险。</p>
+<p><strong>漏洞建议</strong></p>
+<p>将不必要导出的组件设置为不导出的状态：</p>
+<ul>
+<li> Activity不需要导出，请将exported属性设置为false </li>
+<li> 若导出仅为内部通信使用，则设置protectionLevel=signature </li>
+<li> 设置自定义的权限，限制对activity的访问 </li>
+</ul>
+<h4 id="1-2-高-Activity-拒绝服务【无法自行编写对应EXP】"><a href="#1-2-高-Activity-拒绝服务【无法自行编写对应EXP】" class="headerlink" title="1.2 [高] Activity 拒绝服务【无法自行编写对应EXP】"></a>1.2 [高] Activity 拒绝服务【无法自行编写对应EXP】</h4><p><strong>漏洞描述</strong><br>Android组件之间采用Intent来传递数据，如果应用在使用getIntent()，getAction()，Intent.getXXXExtra()获取到空数据、异常或者畸形数据时没有进行异常捕获，应用就会发生Crash，应用不可使用（本地拒绝服务）。恶意应用可通过向受害者应用发送此类空数据、异常或者畸形数据从而使应用产生本地拒绝服务。</p>
+<p><strong>漏洞建议</strong></p>
+<ul>
+<li>将不必要导出的组件调整为不导出。</li>
+<li>对 intent 的数据处理进行保护</li>
+<li>如果 Activity 必须导出，则可以通过添加权限的方式，缩小暴露范围。</li>
+</ul>
+<h4 id="1-3-高-Activity-界面劫持"><a href="#1-3-高-Activity-界面劫持" class="headerlink" title="1.3 [高] Activity 界面劫持"></a>1.3 [高] Activity 界面劫持</h4><p><strong>漏洞描述</strong></p>
+<p>恶意应用将启动自己仿冒的界面覆盖原界面.用户在毫无察觉的情况下输入登录信息,恶意程序在把获取的数据返回给服务端</p>
+<p><strong>测试过程</strong></p>
+<p>安装 HijackActivity.apk,选中想要劫持应用的包名.然后启动目标应用。查看结果</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491079136-b440fe43-f2c1-4e6d-9415-340ac8d00794.png" alt="img"></p>
+<p><strong>漏洞建议</strong></p>
+<p>在 Activity 的 OnPause 函数中加入提示信息,每当 Activity 切换到后台的时候给出提示信息 使用外部产品进行防护。</p>
+<hr>
+<h3 id="二、Service组件"><a href="#二、Service组件" class="headerlink" title="二、Service组件"></a>二、Service组件</h3><p>AService 是 Android 定义的四大组件之一，它没有界面，通常用于在后台完成用户指定的操作。</p>
+<p><strong>学习链接：</strong><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwMjg1NTI2Nw==&mid=2650519945&idx=1&sn=b9d025511815009905019c6ef3519f45&chksm=82cb0185b5bc88932a9b4fcecfaef0884895c77650c613a903b797f4e3ff29630bba55783ec5&scene=21#wechat_redirect"><strong>《Android Service 安全》——安卓APP安全测试</strong></a></p>
+<p>与 Activity 组件 一样，Service 的大部分安全问题也是是由于导出造成的，</p>
+<h4 id="2-1-高-Service-越权操作"><a href="#2-1-高-Service-越权操作" class="headerlink" title="2.1 [高]Service 越权操作"></a>2.1 [高]Service 越权操作</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">使用drozer</span><br><span class="line">1、run app.service.info  –a  [包名]     //查看对外的service组件信息,</span><br><span class="line">找到对外的service组件后,运行：</span><br><span class="line">2、run app.service.start --component [包名] [敏感service组件名] 【--extra string [参数名称一] [参数值一] 【--extra string [参数名称二] [参数值二] 】】</span><br></pre></td></tr></table></figure>
+
+<p>或者使用adb 命令启动被导出的 Service，确认 Service 是否存在敏感信息泄露和越权操作等安全风险：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adb shell am start service –n pachage_name/service_name</span><br></pre></td></tr></table></figure>
+
+<p><strong>漏洞描述</strong></p>
+<p>开发者为方便外部调用，会把 service 组件设置为导出状态。如果由于开发者的疏忽，把一些包含用户敏感信息或可进行敏感操作的组件设置为导出状态。攻击者就有机会利用此漏洞进行越权操作。</p>
+<p><strong>漏洞建议</strong></p>
+<ul>
+<li> 判断 Service 是否真的有必要导出，如果无必要，则设置为非导出。 </li>
+<li> 如果 Service 必须导出，则可以通过添加权限的方式，缩小暴露范围。 </li>
+<li> 对通过 intent 获取的数据做合法性校验。 </li>
+</ul>
+<h4 id="2-2-高-Service-拒绝服务【无法自行编写对应EXP】"><a href="#2-2-高-Service-拒绝服务【无法自行编写对应EXP】" class="headerlink" title="2.2 [高]Service 拒绝服务【无法自行编写对应EXP】"></a>2.2 [高]Service 拒绝服务【无法自行编写对应EXP】</h4><p>同 Activity 中的拒绝服务原理一样。参见 “1.2 [高] Activity 拒绝服务”</p>
+<hr>
+<h3 id="三、Broadcast-receiver-组件"><a href="#三、Broadcast-receiver-组件" class="headerlink" title="三、Broadcast receiver 组件"></a>三、Broadcast receiver 组件</h3><p>Broadcast receiver 是 Android 定义的四大组件之一，它没有界面，通常用来处理系统级事件。</p>
+<p>它是程序之间传递信息时的一种机制，作用就是接收或者发送通知。通俗的来说广播接收器更像是一种传递组件，它能够将信息接收，甚至还可以对它进行过滤然后进行响应。</p>
+<p>一个应用可以在发生特定事件时发送广播，而系统中任何应用只要注册了对应的 Receiver 就会接收到此广播。</p>
+<p>一个应用如果对某个广播感兴趣，就可以注册对应的 Receiver 来接收广播。</p>
+<p><strong>广播事件机制是应用程序（进程）间通信的一种手段。</strong></p>
+<p><strong>学习链接：</strong><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwMjg1NTI2Nw==&mid=2650519962&idx=1&sn=0d54acd540d0ea4719c90eb247ca8c7b&chksm=82cb0196b5bc88807af1b52f9ad7e376d6c07a4168041e363b68b61293537401a32e930d6d72&scene=21#wechat_redirect"><strong>《Android Content Provider 安全》——安卓APP安全测试</strong></a></p>
+<h4 id="3-1-高-Broadcast-广播敏感信息泄露【无法自行编写对应EXP】"><a href="#3-1-高-Broadcast-广播敏感信息泄露【无法自行编写对应EXP】" class="headerlink" title="3.1 [高]Broadcast 广播敏感信息泄露【无法自行编写对应EXP】"></a>3.1 [高]Broadcast 广播敏感信息泄露【无法自行编写对应EXP】</h4><h5 id="3-1-1-找出攻击面"><a href="#3-1-1-找出攻击面" class="headerlink" title="3.1.1 找出攻击面"></a>3.1.1 找出攻击面</h5><ol>
+<li>找出静态注册的 Broadcast receiver：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用drozer</span><br><span class="line">	run app.broadcast.info  –a  [包名]     //查看对外的broadcast组件信息,</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>找出动态注册的 Broadcast receiver：</li>
+</ol>
+<p>通过反编译 apk 文件，获得源码，搜索 <code>registerReceiver</code>。eg：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491138408-0d2f900b-1cbc-4162-9c55-3b6da5bfca51.png" alt="img"></p>
+<ol>
+<li>找出发送广播：</li>
+</ol>
+<p>通过反编译 apk 文件，获得源码。搜索 <code>sendBroadcast</code>、<code>sendOrderedBroadcast</code></p>
+<h5 id="3-1-2-利用攻击面"><a href="#3-1-2-利用攻击面" class="headerlink" title="3.1.2 利用攻击面"></a>3.1.2 利用攻击面</h5><p>需根据实际场景，去自行编写app。注册相应的广播接收器来接收消息，从而导致敏感信息泄露</p>
+<p>由于java能力不足，无法自行编写对应EXP。</p>
+<p><strong>漏洞建议</strong></p>
+<ul>
+<li> 判断是否真的有必要导出，如果无必要，则设置为非导出。 </li>
+<li> 如果必须导出，则可以通过添加权限的方式，缩小暴露范围。 </li>
+<li> 对通过 intent 获取的数据做合法性校验。 </li>
+<li> 尽量不要使用广播发送敏感数据，如发送则需要限制好接受者的权限，或者通过显示意图、setPackage(String packageName)来指定接收器。 </li>
+</ul>
+<p><strong>参考链接：</strong><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwMjg1NTI2Nw==&mid=2650519962&idx=1&sn=0d54acd540d0ea4719c90eb247ca8c7b&chksm=82cb0196b5bc88807af1b52f9ad7e376d6c07a4168041e363b68b61293537401a32e930d6d72&scene=21#wechat_redirect"><strong>《Android Content Provider 安全》——安卓APP安全测试</strong></a></p>
+<h4 id="3-2-高-Broadcast-拒绝服务【无法自行编写对应EXP】"><a href="#3-2-高-Broadcast-拒绝服务【无法自行编写对应EXP】" class="headerlink" title="3.2 [高]Broadcast 拒绝服务【无法自行编写对应EXP】"></a>3.2 [高]Broadcast 拒绝服务【无法自行编写对应EXP】</h4><p>同 Activity 中的拒绝服务原理一样。参见 “1.2 [高] Activity 拒绝服务”</p>
+<h4 id="3-3-高-有序广播导致的拒绝服务-【无法自行编写对应EXP】"><a href="#3-3-高-有序广播导致的拒绝服务-【无法自行编写对应EXP】" class="headerlink" title="3.3 [高] 有序广播导致的拒绝服务 【无法自行编写对应EXP】"></a>3.3 [高] 有序广播导致的拒绝服务 【无法自行编写对应EXP】</h4><p><strong>漏洞原理：</strong>我们可以在恶意 app 中注册同样的广播接收器，然后将优先级设置到最大，最先收到广播数据，甚至可以中断广播，导致正常业务无法运行。</p>
+<hr>
+<h3 id="四、Content-Provider-组件"><a href="#四、Content-Provider-组件" class="headerlink" title="四、Content Provider 组件"></a>四、Content Provider 组件</h3><p>Content Provider 是 Android 定义的四大组件之一，Content Provider使一个应用程序的指定数据集提供给其他应用程序。其他应用可以通过ContentResolver类从该内容提供者中获取或存入数据。</p>
+<p><strong>ContentProvider实现数据共享。是不同应用程序间共享数据的唯一方式，因为android没有提供所有应用共同访问的公共存储区。</strong></p>
+<p>为了实现应用间的数据交互，一般 Content Provider 都会设置为暴露。</p>
+<p><strong>学习链接：</strong><a target="_blank" rel="noopener" href="https://mp.weixin.qq.com/s?__biz=MzAwMjg1NTI2Nw==&mid=2650519989&idx=1&sn=82317a0ebc579b738d3bd607bef4df77&chksm=82cb01b9b5bc88afabc2b633b0ceffbf912b6829a8bedecf9d3c3ad933115a031bbf51877474&scene=21#wechat_redirect"><strong>《Android Content Provider 安全》——安卓APP安全测试</strong></a></p>
+<h4 id="4-1-高-Provider-未授权访问敏感数据（数据泄露）"><a href="#4-1-高-Provider-未授权访问敏感数据（数据泄露）" class="headerlink" title="4.1 [高] Provider 未授权访问敏感数据（数据泄露）"></a>4.1 [高] Provider 未授权访问敏感数据（数据泄露）</h4><ol>
+<li>找出暴露的组件：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">使用drozer</span><br><span class="line">	run app.provider.info  –a  [包名]</span><br><span class="line">可以列出导出的 Content Provider，以及所需要的权限。</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>找出URI：<br>方法一： </li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">使用drozer</span><br><span class="line">	run app.provider.finduri [包名]</span><br><span class="line">注：drozer 工具，只是在 dex 文件和 AndroidManifest.xml 中搜索字符串，会出现漏报。</span><br></pre></td></tr></table></figure>
+
+<p>方法二：<br>    编译 apk 文件，在代码中查找 UriMatcher.addURI ，并手动拼接 uri。eg：<img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491196518-22db3274-5b66-4b4a-8b1b-9e2988525ce0.png" alt="img"></p>
+<ol>
+<li> 找到URI后，在 AndroidManifest.xml 查看 是否对所有路径进行了限制。 </li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491214363-4508a838-4763-45cb-9dbb-7ca78d5f48f7.png" alt="img"></p>
+<ol>
+<li>验证未限制的URI：</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用drozer：</span><br><span class="line">	run app.provider.query [扫描出来的URI]  //根据扫描出来的URI，进行访问，查看是否可以看到一些敏感信息。</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491257459-b6fbd569-f5c0-4b8f-99b5-1e36221e63dc.png" alt="img"></p>
+<p>出现敏感数据即为漏洞。</p>
+<p><strong>漏洞描述</strong></p>
+<p>Content Provider是安卓应用组件，以表格的形式把数据展现给外部的应用。每个Content Provider都对应一个以”content://”开头的特定URI，任何应用都可以通过这个URI操作Content Provider 应用的数据库。如果应用对权限控制不当就会造成信息泄露。</p>
+<p><strong>漏洞建议</strong></p>
+<ul>
+<li> 判断 Content Provider 是否真的有必要导出，如果无必要，则设置为非导出。 </li>
+<li> 如果 Content Provider 必须导出，则可以通过添加权限的方式，缩小暴露范围。 </li>
+</ul>
+<h4 id="4-2-高-Provider-数据参数常规渗透"><a href="#4-2-高-Provider-数据参数常规渗透" class="headerlink" title="4.2 [高] Provider 数据参数常规渗透"></a>4.2 [高] Provider 数据参数常规渗透</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">使用drozer：</span><br><span class="line">	run app.provider.query &quot;URI&quot;  来验证</span><br></pre></td></tr></table></figure>
+
+<p>当发现drozer验证URI 未报权限错误时，即可把URI的参数当成常规参数来进行日常渗透。eg：</p>
+<h5 id="4-2-1-SQL注入"><a href="#4-2-1-SQL注入" class="headerlink" title="4.2.1 SQL注入"></a>4.2.1 SQL注入</h5><p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491291495-2cf980fd-f6bb-4a44-b5bd-5f505413abea.png" alt="img"></p>
+<h5 id="4-2-2-任意文件读取"><a href="#4-2-2-任意文件读取" class="headerlink" title="4.2.2 任意文件读取"></a>4.2.2 任意文件读取</h5><p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491307506-ef8c56f2-42ac-4731-b15d-220b50e69e11.png" alt="img"></p>
+<hr>
+<h3 id="附一、Webview-组件安全检测"><a href="#附一、Webview-组件安全检测" class="headerlink" title="附一、Webview 组件安全检测"></a>附一、Webview 组件安全检测</h3><p>WebView 是 Android 系统定义的一个的控件，其继承自 AbsoluteLayout，相当于一个微型的浏览器，可以用来显示网页、执行 JavaScript 等。</p>
+<h4 id="1-1-高-Webview-远程代码执行漏洞检测"><a href="#1-1-高-Webview-远程代码执行漏洞检测" class="headerlink" title="1.1 [高] Webview 远程代码执行漏洞检测"></a>1.1 [高] Webview 远程代码执行漏洞检测</h4><p><strong>检测方法</strong></p>
+<ol>
+<li>查看 最小兼容版本（<code>minSdkVersion</code>） 版本，若大于17则没有漏洞。</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">方法一：使用drozer:</span><br><span class="line">	run app.package.manifest [包名]</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491331998-0441aef8-dddb-4181-b09c-8a3304dcb8fa.png" alt="img"></p>
+<ol>
+<li>反编译源代码。静态代码扫描加人工复核的方式</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">在代码内全局搜索 WebView.addJavascriptInterface ，并记录位置:</span><br><span class="line">	WebView.addJavascriptInterface(Object obj, String interfaceName)  </span><br><span class="line">漏洞触发的前提条件：</span><br><span class="line">	使用addJavascriptInterface方法注册可供JavaScript调用的Java对象； </span><br><span class="line"> 	使用WebView加载外部网页或者本地网页； </span><br><span class="line">	Android系统版本低于4.2；</span><br></pre></td></tr></table></figure>
+
+<p><strong>漏洞描述</strong></p>
+<p>Android API &lt; 17 之前版本存在远程代码执行安全漏洞，该漏洞源于程序没有正确限制使用 addJavaScriptInterface(CVE-2012-6636)方法，攻击者可以通过 Java 反射利用该漏洞执行任意 Java 对象的方法，导致远程代码执行安全漏洞</p>
+<p><strong>漏洞建议</strong></p>
+<ol>
+<li>将最小兼容版本（minSdkVersion）大于等于17，此漏洞则不存在风险。</li>
+<li>在Android版本小于17中使用，不使用addJavascriptInterface方法，若要实现JavaScript调用java对象的功能，可以拦截prompt方法来实现此功能，以此来规避漏洞。</li>
+</ol>
+<hr>
+<h4 id="1-2-高-Webview-通过file跨域访问任意文件"><a href="#1-2-高-Webview-通过file跨域访问任意文件" class="headerlink" title="1.2 [高]  Webview 通过file跨域访问任意文件"></a>1.2 [高]  Webview 通过file跨域访问任意文件</h4><p><strong>检测方法</strong></p>
+<ol>
+<li>反编译，查看源码。<code>WebViewActivity.java</code></li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491364321-20eb0f4e-5c68-48be-9ded-9d164ad496c4.png" alt="img"></p>
+<ol>
+<li>查看 <code>setAllowFileAccess</code> 属性值        #该方法来控制<code>WebView</code>是否能够访问本地html文件</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491378523-9c64f82d-870a-4741-a10e-36d0b066fbfd.png" alt="img"></p>
+<ol>
+<li>查看 <code>setAllowFileAccessFromFileURLS()</code>        #该方法决定是否允许JS使用file域访问本地文件。此功能破坏了同源策略SOP的限制。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491401772-a53f42d6-c584-4ce2-bf67-34f75051f611.png" alt="img"></p>
+<p><strong>漏洞描述</strong></p>
+<p>JavaScript的延时执行能够绕过file协议的同源检查，并能够访问受害应用的所有私有文件，即通过WebView对Javascript的延时执行和将当前Html文件删除掉并软连接指向其他文件就可以读取到被符号链接所指的文件，然后通过JavaScript再次读取HTML文件，即可获取到被符号链接所指的文件。大多数使用WebView的应用都会受到该漏洞的影响，恶意应用通过该漏洞，可在无特殊权限下盗取应用的任意私有文件，尤其是浏览器，可通过利用该漏洞，获取到浏览器所保存的密码、Cookie、收藏夹以及历史记录等敏感信息，从而造成敏感信息泄露。</p>
+<p><strong>漏洞建议</strong></p>
+<ol>
+<li>将不必要导出的组件设置为不导出如果应用的组件不必要导出，建议显式设置所注册组件的“android:exported”属性为 false；</li>
+<li>如果应用的需要导出包含 WebView 的组件,建议禁止使用 File 域协议。</li>
+<li>如果需要使用 File 协议，禁止 File 协议调用 JavaScript</li>
+</ol>
+<hr>
+<h4 id="1-3-中-WebView-密码明文存储漏洞检测"><a href="#1-3-中-WebView-密码明文存储漏洞检测" class="headerlink" title="1.3 [中]  WebView 密码明文存储漏洞检测"></a>1.3 [中]  <strong>WebView</strong> 密码明文存储漏洞检测</h4><p><strong>检测方法</strong></p>
+<ol>
+<li>反编译，查看源码。遍历查询调用了<code>setSavePassword</code> 的函数路径，然后再获取函数参数值，判断参数值是否为true。<br>中风险：代码中未调用<code>setSavePassword(false)</code>，或设置<code>setSavePassword(ture)</code>；<br>无风险：代码中调用<code>setSavePassword(false)</code>。</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491450931-04feed39-fb05-46c2-9c5a-1bcf4a40d982.png" alt="img"></p>
+<p><strong>漏洞描述</strong></p>
+<p>webview 的保存密码功能默认设置为 true。在使用WebView的过程中忽略了WebView setSavePassword，当用户选择保存在WebView中输入的用户名和密码，则会被明文保存到应用数据目录的databases/WebView.db中。如果手机被root就可以获取明文保存的密码，造成用户的个人敏感数据泄露。</p>
+<p><strong>漏洞建议</strong></p>
+<ol>
+<li>显示设置 webView.getSetting().setSavePassword(false)。</li>
+</ol>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/12/08/2022/app%E5%85%B6%E4%BB%96%E6%BC%8F%E6%B4%9E%E8%AE%B0%E5%BD%95/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">app其他漏洞记录</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/12/08/2022/AndroidManifest-xml-%E6%96%87%E4%BB%B6%E6%A3%80%E6%B5%8B/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">AndroidManifest.xml 文件检测</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Angleashuaiby</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v0.0.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Activity%E7%BB%84%E4%BB%B6"><span class="nav-text">一、Activity组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-%E9%AB%98-Activity-%E8%B6%8A%E6%9D%83%E8%AE%BF%E9%97%AE"><span class="nav-text">1.1 [高]Activity 越权访问</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E9%AB%98-Activity-%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E3%80%90%E6%97%A0%E6%B3%95%E8%87%AA%E8%A1%8C%E7%BC%96%E5%86%99%E5%AF%B9%E5%BA%94EXP%E3%80%91"><span class="nav-text">1.2 [高] Activity 拒绝服务【无法自行编写对应EXP】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-%E9%AB%98-Activity-%E7%95%8C%E9%9D%A2%E5%8A%AB%E6%8C%81"><span class="nav-text">1.3 [高] Activity 界面劫持</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81Service%E7%BB%84%E4%BB%B6"><span class="nav-text">二、Service组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E9%AB%98-Service-%E8%B6%8A%E6%9D%83%E6%93%8D%E4%BD%9C"><span class="nav-text">2.1 [高]Service 越权操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-%E9%AB%98-Service-%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E3%80%90%E6%97%A0%E6%B3%95%E8%87%AA%E8%A1%8C%E7%BC%96%E5%86%99%E5%AF%B9%E5%BA%94EXP%E3%80%91"><span class="nav-text">2.2 [高]Service 拒绝服务【无法自行编写对应EXP】</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81Broadcast-receiver-%E7%BB%84%E4%BB%B6"><span class="nav-text">三、Broadcast receiver 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-%E9%AB%98-Broadcast-%E5%B9%BF%E6%92%AD%E6%95%8F%E6%84%9F%E4%BF%A1%E6%81%AF%E6%B3%84%E9%9C%B2%E3%80%90%E6%97%A0%E6%B3%95%E8%87%AA%E8%A1%8C%E7%BC%96%E5%86%99%E5%AF%B9%E5%BA%94EXP%E3%80%91"><span class="nav-text">3.1 [高]Broadcast 广播敏感信息泄露【无法自行编写对应EXP】</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-1-%E6%89%BE%E5%87%BA%E6%94%BB%E5%87%BB%E9%9D%A2"><span class="nav-text">3.1.1 找出攻击面</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-2-%E5%88%A9%E7%94%A8%E6%94%BB%E5%87%BB%E9%9D%A2"><span class="nav-text">3.1.2 利用攻击面</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-%E9%AB%98-Broadcast-%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1%E3%80%90%E6%97%A0%E6%B3%95%E8%87%AA%E8%A1%8C%E7%BC%96%E5%86%99%E5%AF%B9%E5%BA%94EXP%E3%80%91"><span class="nav-text">3.2 [高]Broadcast 拒绝服务【无法自行编写对应EXP】</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-%E9%AB%98-%E6%9C%89%E5%BA%8F%E5%B9%BF%E6%92%AD%E5%AF%BC%E8%87%B4%E7%9A%84%E6%8B%92%E7%BB%9D%E6%9C%8D%E5%8A%A1-%E3%80%90%E6%97%A0%E6%B3%95%E8%87%AA%E8%A1%8C%E7%BC%96%E5%86%99%E5%AF%B9%E5%BA%94EXP%E3%80%91"><span class="nav-text">3.3 [高] 有序广播导致的拒绝服务 【无法自行编写对应EXP】</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9B%9B%E3%80%81Content-Provider-%E7%BB%84%E4%BB%B6"><span class="nav-text">四、Content Provider 组件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-%E9%AB%98-Provider-%E6%9C%AA%E6%8E%88%E6%9D%83%E8%AE%BF%E9%97%AE%E6%95%8F%E6%84%9F%E6%95%B0%E6%8D%AE%EF%BC%88%E6%95%B0%E6%8D%AE%E6%B3%84%E9%9C%B2%EF%BC%89"><span class="nav-text">4.1 [高] Provider 未授权访问敏感数据（数据泄露）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-%E9%AB%98-Provider-%E6%95%B0%E6%8D%AE%E5%8F%82%E6%95%B0%E5%B8%B8%E8%A7%84%E6%B8%97%E9%80%8F"><span class="nav-text">4.2 [高] Provider 数据参数常规渗透</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-1-SQL%E6%B3%A8%E5%85%A5"><span class="nav-text">4.2.1 SQL注入</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-2-2-%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6%E8%AF%BB%E5%8F%96"><span class="nav-text">4.2.2 任意文件读取</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%99%84%E4%B8%80%E3%80%81Webview-%E7%BB%84%E4%BB%B6%E5%AE%89%E5%85%A8%E6%A3%80%E6%B5%8B"><span class="nav-text">附一、Webview 组件安全检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-%E9%AB%98-Webview-%E8%BF%9C%E7%A8%8B%E4%BB%A3%E7%A0%81%E6%89%A7%E8%A1%8C%E6%BC%8F%E6%B4%9E%E6%A3%80%E6%B5%8B"><span class="nav-text">1.1 [高] Webview 远程代码执行漏洞检测</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E9%AB%98-Webview-%E9%80%9A%E8%BF%87file%E8%B7%A8%E5%9F%9F%E8%AE%BF%E9%97%AE%E4%BB%BB%E6%84%8F%E6%96%87%E4%BB%B6"><span class="nav-text">1.2 [高]  Webview 通过file跨域访问任意文件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-%E4%B8%AD-WebView-%E5%AF%86%E7%A0%81%E6%98%8E%E6%96%87%E5%AD%98%E5%82%A8%E6%BC%8F%E6%B4%9E%E6%A3%80%E6%B5%8B"><span class="nav-text">1.3 [中]  WebView 密码明文存储漏洞检测</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>

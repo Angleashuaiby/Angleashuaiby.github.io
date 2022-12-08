@@ -9,7 +9,7 @@
     
     <title>
         
-            nps内网穿透 |
+            app其他漏洞记录 |
         
         Angleashuaiby&#39;s note
     </title>
@@ -137,7 +137,7 @@
     <div class="article-content-container">
 
         <div class="article-title">
-            <span class="title-hover-animation">nps内网穿透</span>
+            <span class="title-hover-animation">app其他漏洞记录</span>
         </div>
 
         
@@ -156,8 +156,8 @@
                         <div class="article-meta-info">
     <span class="article-date article-meta-item">
         <i class="fas fa-edit"></i>&nbsp;
-        <span class="pc">2022-06-24 17:41:50</span>
-        <span class="mobile">2022-06-24 17:41</span>
+        <span class="pc">2022-12-08 17:44:17</span>
+        <span class="mobile">2022-12-08 17:44</span>
     </span>
     
         <span class="article-categories article-meta-item">
@@ -165,7 +165,7 @@
             <ul>
                 
                     <li>
-                        <a href="/categories/%E5%86%85%E7%BD%91%E6%94%BB%E5%87%BB/">内网攻击</a>&nbsp;
+                        <a href="/categories/app%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">app渗透测试</a>&nbsp;
                     </li>
                 
             </ul>
@@ -176,7 +176,7 @@
     
     
         <span class="article-wordcount article-meta-item">
-            <i class="fas fa-file-word"></i>&nbsp;<span>840 Words</span>
+            <i class="fas fa-file-word"></i>&nbsp;<span>978 Words</span>
         </span>
     
     
@@ -197,68 +197,79 @@
         
 
         <div class="article-content markdown-body">
-            <p>当你真正喜欢做一件事时，自律就会成为你的本能。</p>
+            <p>只有比别人更早、更勤奋地努力，才能更快地尝到成功的滋味。</p>
 <span id="more"></span>
 
 <hr>
-<h3 id="NPS工具简介"><a href="#NPS工具简介" class="headerlink" title="NPS工具简介"></a>NPS工具简介</h3><p>nps是一款轻量级、高性能、功能强大的内网穿透代理服务器。目前支持tcp、udp流量转发，可支持任何tcp、udp上层协议（访问内网网站、本地支付接口调试、ssh访问、远程桌面，内网dns解析等等……），此外还支持内网http代理、内网socks5代理、p2p等，并带有功能强大的web管理端。</p>
-<p><strong>官网下载地址：</strong><a class="link"   target="_blank" rel="noopener" href="https://github.com/ehang-io/nps/" >https://github.com/ehang-io/nps/<i class="fas fa-external-link-alt"></i></a></p>
-<p><strong>官网手册：</strong><a class="link"   target="_blank" rel="noopener" href="https://ehang-io.github.io/nps/#/" >https://ehang-io.github.io/nps/#/<i class="fas fa-external-link-alt"></i></a></p>
+<h3 id="一、Activity组件"><a href="#一、Activity组件" class="headerlink" title="一、Activity组件"></a>一、Activity组件</h3><h3 id="高-不安全的本地存储"><a href="#高-不安全的本地存储" class="headerlink" title="[高] 不安全的本地存储"></a>[高] 不安全的本地存储</h3><p><strong>检测方法</strong></p>
+<ol>
+<li>Shared Preferences是用key-value来存储私有的原始数据的xml文件。数据类型有布尔型，浮点型，整形，长整型和字符串。</li>
+</ol>
+<p>通常情况下存储的路径为：<code>/data/data/&lt;package name&gt;/shared_prefs/&lt;filename.xml&gt;</code>。直接打开查看是否有敏感数据。</p>
+<ol>
+<li>SQLite数据库是轻量级基于文件的数据库。这些文件通常以db或者sqlite结尾。安卓默认提供了大量SQLite支持。</li>
+</ol>
+<p>应用的数据库一般存储在下面的地方：</p>
+<p><code>/data/data/&lt;package name&gt;/databases/&lt;databasename.db&gt;</code>，可以使用SQLite数据库直接打开查看是否有敏感数据。</p>
+<ol>
+<li>检查SD卡目录中是否存在敏感数据。</li>
+</ol>
+<p><strong>如何查看数据：</strong>通过<code>adb shell</code> + <code>vim命令</code> 查看</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491625479-2c2be8be-6509-4c34-a1fc-814db6df1dcf.png" alt="img"></p>
+<p><strong>漏洞描述</strong></p>
+<p>安卓开发者使用多种方法将数据存储在安卓应用中，而存储在本地的数据文件如果未加密，易造成敏感信息泄漏。</p>
+<h3 id="高-可以重新编译打包"><a href="#高-可以重新编译打包" class="headerlink" title="[高] 可以重新编译打包"></a>[高] 可以重新编译打包</h3><p><strong>检测方法</strong></p>
+<p>​    中风险：应用程序可在已root的设备上运行，且完全没有任何提示。</p>
+<p><strong>漏洞描述</strong></p>
+<ol>
+<li>对源代码进行修改后，使用ApkTool对修改过的文件夹进行重新编译。新的apk输出到反编译源码文件夹的dist目录</li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">apktool b [反编译源码的文件夹] -o [新apk名称]</span><br></pre></td></tr></table></figure>
+
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491662762-91caa3bd-9a2e-4d25-998f-e0e9c319cb7a.png" alt="img"></p>
+<ol>
+<li>重新编译自签名打包</li>
+</ol>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491677840-7f8f528c-b0b6-4e9d-a19e-1ebcf033904a.png" alt="img"></p>
 <hr>
-<h3 id="一、服务端"><a href="#一、服务端" class="headerlink" title="一、服务端"></a>一、服务端</h3><h4 id="1-1-服务端的安装"><a href="#1-1-服务端的安装" class="headerlink" title="1.1 服务端的安装"></a>1.1 服务端的安装</h4><p>进入官网下载对应版本的服务端nps软件。根据VPS的系统来进行下载，我这里下载的是<code>linux_amd64_server.tar.gz</code>版本。</p>
-<p>将此压缩包上传至VPS，此处假设文件夹路径为/root/nps。执行代码：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf linux_amd64_server.tar.gz</span><br><span class="line">rm -rf linux_amd64_server.tar.gz</span><br><span class="line">sudo ./nps install  		#一定要执行安装命令。</span><br><span class="line">sudo nps start/stop/restart					#此命令用来控制nps服务端的启停</span><br><span class="line">默认的web登录端口为 8080 ，口令为：admin/123</span><br></pre></td></tr></table></figure>
+<h3 id="中-root环境检测"><a href="#中-root环境检测" class="headerlink" title="[中] root环境检测"></a>[中] root环境检测</h3><p><strong>检测方法</strong></p>
+<p>应用程序可在已root的设备上运行，且完全没有任何提示。</p>
+<p><strong>漏洞描述</strong></p>
+<p>检测运行客户端程序的手机是否经过 root。在 root 的手机上，攻击者可以对应用进行调试、内存访问修改、HOOK 关键 API 等操作，极大影响客户端安全，因此需要对运行环境进行检测，并且对用户进行安全提示</p>
+<p><strong>漏洞建议</strong></p>
+<ol>
+<li>在APP启动时，尝试执行su命令或查找su文件，除非找不到文件否则一律视为异常，并停止运行。<br>示例代码： </li>
+</ol>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">/** </span><br><span class="line"> * 判断手机是否ROOT </span><br><span class="line"> */  </span><br><span class="line">public boolean isRoot() &#123;  </span><br><span class="line">	boolean root = false;  </span><br><span class="line">	try &#123;  </span><br><span class="line">		if ((!new File(&quot;/system/bin/su&quot;).exists())  </span><br><span class="line">				&amp;&amp; (!new File(&quot;/system/xbin/su&quot;).exists())) &#123;  </span><br><span class="line">			root = false;  </span><br><span class="line">		&#125; else &#123;  </span><br><span class="line">			root = true;  </span><br><span class="line">		&#125;  </span><br><span class="line">	&#125; catch (Exception e) &#123;  </span><br><span class="line">	&#125;  </span><br><span class="line">	return root;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h4 id="1-2-服务端修改配置"><a href="#1-2-服务端修改配置" class="headerlink" title="1.2 服务端修改配置"></a>1.2 服务端修改配置</h4><p>登录成功后一定要修改相关密码，修改配置文件。</p>
-<ul>
-<li>一定要改账密和web控制端端口。</li>
-<li>要确保能从客户端设备上正常访问配置文件中所配置的bridge_port端口</li>
-<li>此配置文件才是真正用来控制nps的。要在此处进行账密的更改，更改后重启nps更新配置。</li>
-</ul>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/nps/conf/nps.conf</span><br></pre></td></tr></table></figure>
-
-<h4 id="1-3-服务web控制端-添加-客户端监听"><a href="#1-3-服务web控制端-添加-客户端监听" class="headerlink" title="1.3 服务web控制端 添加 客户端监听"></a>1.3 服务web控制端 添加 客户端监听</h4><p><img src="https://s2.loli.net/2022/06/24/7PU3wM5BjQ6XO9i.png" alt="image"></p>
-<ul>
-<li>备注：名字</li>
-<li>Basic认证的用户名/密码： Socks代理时需要用到的用户名和密码</li>
-<li>唯一验证秘钥：客户端需要用到的东西，但是留空可以自动生成。</li>
-<li>其他就顾名思义了。</li>
-</ul>
-<p><img src="https://s2.loli.net/2022/06/24/QeUYzFX4Vq693cu.png" alt="image _1_.png"></p>
-<p><img src="https://s2.loli.net/2022/06/24/3c7SqtRawVnkzZ2.png" alt="image _2_.png"></p>
-<p>这个秘钥客户端需要用到</p>
 <hr>
-<h3 id="二、客户端"><a href="#二、客户端" class="headerlink" title="二、客户端"></a>二、客户端</h3><h4 id="2-1-客户端通过秘钥链接"><a href="#2-1-客户端通过秘钥链接" class="headerlink" title="2.1 客户端通过秘钥链接"></a>2.1 客户端通过秘钥链接</h4><p>优点：通过秘钥链接的无需传配置文件信息。</p>
-<p>解压客户端windows主机上的<code>windows_amd64_client.tar.gz</code>，并在CMD中运行命令。</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">npc.exe -server=你的nps:8024 -vkey=你的密钥 </span><br><span class="line"> </span><br><span class="line">注：点击web管理中客户端前的+号，即可复制启动命令</span><br></pre></td></tr></table></figure>
+<h3 id="中-Logcat-日志检测"><a href="#中-Logcat-日志检测" class="headerlink" title="[中] Logcat 日志检测"></a>[中] Logcat 日志检测</h3><p><strong>检测方法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">使用命令# adb logcat在终端中打印出所有的日志。通过logcat的选项来过滤感兴趣的内容。或者通过命令`#adb logcat &gt; output.txt` ，将日志保存到电脑本地，以便后期进一步分析。</span><br></pre></td></tr></table></figure>
 
-<p><img src="https://s2.loli.net/2022/06/24/QqitM3Rrw1YOk8j.png" alt="image.png"></p>
-<p>如果有连接</p>
-<p>这里会由<code>离线</code>变成<code>在线</code>。此时成功连接。</p>
-<p><img src="https://s2.loli.net/2022/06/24/IriBAsKSftPwGRy.png" alt="image _1_.png"></p>
-<p>注：连接时，火绒会提示有软件尝试安装。【猜测是临时安装服务器的配置信息】</p>
-<h4 id="2-2客户端通过配置信息连接"><a href="#2-2客户端通过配置信息连接" class="headerlink" title="2.2客户端通过配置信息连接"></a>2.2客户端通过配置信息连接</h4><p>此模式使用nps的公钥或者客户端私钥验证，各种配置在客户端完成，同时服务端web也可以进行管理。</p>
-<p><strong>使用命令：</strong></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./npc -config=npc配置文件路径</span><br></pre></td></tr></table></figure>
-
-<p><strong>配置文件说明：</strong></p>
-<p>参考链接：<a class="link"   target="_blank" rel="noopener" href="https://ehang-io.github.io/nps/#/use?id=%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6%E8%AF%B4%E6%98%8E" >https://ehang-io.github.io/nps/#/use?id=配置文件说明<i class="fas fa-external-link-alt"></i></a></p>
-<p><strong>据学习，还是第一种方法要便捷。故此处不作过多介绍。</strong></p>
-<hr>
-<h3 id="三、配置socks5代理进行内网穿透"><a href="#三、配置socks5代理进行内网穿透" class="headerlink" title="三、配置socks5代理进行内网穿透"></a>三、配置socks5代理进行内网穿透</h3><p>要等客户端上线以后在配置Socks代理。连接后，点击隧道按钮——&gt;新增。</p>
-<p><img src="https://s2.loli.net/2022/06/24/oYp2gh45D3ySrit.png" alt="image _2_.png"></p>
-<p><img src="https://s2.loli.net/2022/06/24/481eQENODHgGulA.png" alt="image _3_.png"></p>
 <ul>
-<li>模式选择 socks代理</li>
-<li>客户端ID 自动选择，如果没有，则看 客户端列表 连接的ID。此处为4</li>
-<li>备注留空</li>
-<li>服务端端口就是各种代理器去访问的端口。此处为8083。</li>
+<li>-v verbose  打印详细</li>
+<li>-d debug  打印调试级日志</li>
+<li>-I information 打印提示级日志</li>
+<li>-e error   打印错误级日志</li>
+<li>-w warning  打印警告级日志</li>
 </ul>
-<p><img src="https://s2.loli.net/2022/06/24/pahLe9cDYr2Cib4.png" alt="image _4_.png"></p>
-<p><img src="https://s2.loli.net/2022/06/24/7mP5heLrH1YD9zV.png" alt="image _5_.png"></p>
-<p>此时，使用Proxifier进行尝试。就成了。</p>
-<p><img src="https://s2.loli.net/2022/06/24/NPqIHTCcR6DGYVZ.png" alt="image _6_.png"></p>
-<p>!<img src="https://s2.loli.net/2022/06/24/APqOcS5btFif4BU.png" alt="image _7_.png"></p>
+<p>eg:</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670491726909-c456f758-91d8-453e-8450-f0e7381b4c3d.png" alt="img"></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">附： 尝试使用命令#adb logcat|grep “cookie”可以从logcat的输出中过滤出诸如cookies等敏感信息。</span><br></pre></td></tr></table></figure>
+
+<p><strong>漏洞描述</strong></p>
+<p>当APP处理用户或其它数据源输入的数据时，把部分敏感数据放在日志中，容易被攻击者利用造成信息泄露</p>
+<p><strong>漏洞建议</strong></p>
+<p>APP 的错误采集，异常反馈，必要的日志还是要被输出的，建议使用 ProGuard 等工具在 APP 的发行版本(release)中自动删除Log.d()和 Log.v()对应的代码</p>
+<hr>
+<h3 id="中-代码混淆检测"><a href="#中-代码混淆检测" class="headerlink" title="[中] 代码混淆检测"></a>[中] 代码混淆检测</h3><p><strong>检测方法</strong></p>
+<p>对应用程序进行反编译，查看代码是否做混淆处理(加壳)</p>
+<p><strong>漏洞描述</strong></p>
+<p>应用程序关键代码明文暴露降低了攻击者入侵和利用的门槛，攻击者或恶意程序可通过修改代码获取关键信息或绕过部分逻辑直接操作。</p>
+<p><strong>漏洞建议</strong></p>
+<ol>
+<li>使用混淆工具对源码做混淆处理。</li>
+</ol>
 
         </div>
 
@@ -269,29 +280,14 @@
         
             <div class="article-nav">
                 
-                    <div class="article-prev">
-                        <a class="prev"
-                           rel="prev"
-                           href="/2022/07/04/2022/python%E5%85%8D%E6%9D%80shellcode%E5%8A%A0%E8%BD%BD%E5%99%A8/"
-                        >
-                            <span class="left arrow-icon flex-center">
-                              <i class="fas fa-chevron-left"></i>
-                            </span>
-                            <span class="title flex-center">
-                                <span class="post-nav-title-item">python免杀shellcode加载器</span>
-                                <span class="post-nav-item">Prev posts</span>
-                            </span>
-                        </a>
-                    </div>
-                
                 
                     <div class="article-next">
                         <a class="next"
                            rel="next"
-                           href="/2022/06/16/2022/windows%E4%B8%8B%E7%BC%96%E8%AF%91masscan/"
+                           href="/2022/12/08/2022/Android%E7%BB%84%E4%BB%B6%E5%AE%89%E5%85%A8/"
                         >
                             <span class="title flex-center">
-                                <span class="post-nav-title-item">windows下编译masscan</span>
+                                <span class="post-nav-title-item">Android组件安全</span>
                                 <span class="post-nav-item">Next posts</span>
                             </span>
                             <span class="right arrow-icon flex-center">
@@ -405,7 +401,7 @@
         <aside class="page-aside">
             <div class="post-toc-wrap">
     <div class="post-toc">
-        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#NPS%E5%B7%A5%E5%85%B7%E7%AE%80%E4%BB%8B"><span class="nav-text">NPS工具简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81%E6%9C%8D%E5%8A%A1%E7%AB%AF"><span class="nav-text">一、服务端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E7%9A%84%E5%AE%89%E8%A3%85"><span class="nav-text">1.1 服务端的安装</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-2-%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BF%AE%E6%94%B9%E9%85%8D%E7%BD%AE"><span class="nav-text">1.2 服务端修改配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-3-%E6%9C%8D%E5%8A%A1web%E6%8E%A7%E5%88%B6%E7%AB%AF-%E6%B7%BB%E5%8A%A0-%E5%AE%A2%E6%88%B7%E7%AB%AF%E7%9B%91%E5%90%AC"><span class="nav-text">1.3 服务web控制端 添加 客户端监听</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BA%8C%E3%80%81%E5%AE%A2%E6%88%B7%E7%AB%AF"><span class="nav-text">二、客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%9A%E8%BF%87%E7%A7%98%E9%92%A5%E9%93%BE%E6%8E%A5"><span class="nav-text">2.1 客户端通过秘钥链接</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%80%9A%E8%BF%87%E9%85%8D%E7%BD%AE%E4%BF%A1%E6%81%AF%E8%BF%9E%E6%8E%A5"><span class="nav-text">2.2客户端通过配置信息连接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%89%E3%80%81%E9%85%8D%E7%BD%AEsocks5%E4%BB%A3%E7%90%86%E8%BF%9B%E8%A1%8C%E5%86%85%E7%BD%91%E7%A9%BF%E9%80%8F"><span class="nav-text">三、配置socks5代理进行内网穿透</span></a></li></ol>
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%80%E3%80%81Activity%E7%BB%84%E4%BB%B6"><span class="nav-text">一、Activity组件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98-%E4%B8%8D%E5%AE%89%E5%85%A8%E7%9A%84%E6%9C%AC%E5%9C%B0%E5%AD%98%E5%82%A8"><span class="nav-text">[高] 不安全的本地存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98-%E5%8F%AF%E4%BB%A5%E9%87%8D%E6%96%B0%E7%BC%96%E8%AF%91%E6%89%93%E5%8C%85"><span class="nav-text">[高] 可以重新编译打包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD-root%E7%8E%AF%E5%A2%83%E6%A3%80%E6%B5%8B"><span class="nav-text">[中] root环境检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD-Logcat-%E6%97%A5%E5%BF%97%E6%A3%80%E6%B5%8B"><span class="nav-text">[中] Logcat 日志检测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD-%E4%BB%A3%E7%A0%81%E6%B7%B7%E6%B7%86%E6%A3%80%E6%B5%8B"><span class="nav-text">[中] 代码混淆检测</span></a></li></ol>
     </div>
 </div>
         </aside>

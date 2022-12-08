@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="keywords" content="Hexo Theme Keep">
+    <meta name="description" content="Hexo Theme Keep">
+    <meta name="author" content="Angleashuaiby">
+    
+    <title>
+        
+            AndroidManifest.xml 文件检测 |
+        
+        Angleashuaiby&#39;s note
+    </title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <link rel="shortcut icon" href="/images/logo.jpg">
+    
+<link rel="stylesheet" href="/css/font-awesome.min.css">
+
+    <script id="hexo-configurations">
+    let KEEP = window.KEEP || {};
+    KEEP.hexo_config = {"hostname":"angleashuaiby.github.io","root":"/","language":"en","path":"search.json"};
+    KEEP.theme_config = {"toc":{"enable":true,"number":false,"expand_all":true,"init_open":true},"style":{"primary_color":"#0066CC","avatar":"/images/touxiang.jpg","favicon":"/images/logo.jpg","article_img_align":"left","left_side_width":"260px","content_max_width":"920px","hover":{"shadow":true,"scale":true},"first_screen":{"enable":false,"background_img":"/images/bg.svg","description":"站在巨人的肩膀上学习."},"scroll":{"progress_bar":{"enable":false},"percent":{"enable":false}}},"local_search":{"enable":true,"preload":true},"code_copy":{"enable":true,"style":"default"},"pjax":{"enable":false},"lazyload":{"enable":false},"version":"0.0.1"};
+    KEEP.language_ago = {"second":"%s seconds ago","minute":"%s minutes ago","hour":"%s hours ago","day":"%s days ago","week":"%s weeks ago","month":"%s months ago","year":"%s years ago"};
+  </script>
+<meta name="generator" content="Hexo 5.4.0"></head>
+
+
+<body>
+<div class="progress-bar-container">
+    
+
+    
+</div>
+
+
+<main class="page-container">
+
+    
+
+    <div class="page-main-content">
+
+        <div class="page-main-content-top">
+            <header class="header-wrapper">
+
+    <div class="header-content">
+        <div class="left">
+            
+            <a class="logo-title" href="/">
+                Angleashuaiby&#39;s note
+            </a>
+        </div>
+
+        <div class="right">
+            <div class="pc">
+                <ul class="menu-list">
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/"
+                            >
+                                首页
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/archives"
+                            >
+                                归档
+                            </a>
+                        </li>
+                    
+                        <li class="menu-item">
+                            <a class=""
+                               href="/categories"
+                            >
+                                分类
+                            </a>
+                        </li>
+                    
+                    
+                        <li class="menu-item search search-popup-trigger">
+                            <i class="fas fa-search"></i>
+                        </li>
+                    
+                </ul>
+            </div>
+            <div class="mobile">
+                
+                    <div class="icon-item search search-popup-trigger"><i class="fas fa-search"></i></div>
+                
+                <div class="icon-item menu-bar">
+                    <div class="menu-bar-middle"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="header-drawer">
+        <ul class="drawer-menu-list">
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/">首页</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/archives">归档</a>
+                </li>
+            
+                <li class="drawer-menu-item flex-center">
+                    <a class=""
+                       href="/categories">分类</a>
+                </li>
+            
+        </ul>
+    </div>
+
+    <div class="window-mask"></div>
+
+</header>
+
+
+        </div>
+
+        <div class="page-main-content-middle">
+
+            <div class="main-content">
+
+                
+                    <div class="fade-in-down-animation">
+    <div class="article-content-container">
+
+        <div class="article-title">
+            <span class="title-hover-animation">AndroidManifest.xml 文件检测</span>
+        </div>
+
+        
+            <div class="article-header">
+                <div class="avatar">
+                    <img src="/images/touxiang.jpg">
+                </div>
+                <div class="info">
+                    <div class="author">
+                        <span class="name">Angleashuaiby</span>
+                        
+                            <span class="author-label">Lv2</span>
+                        
+                    </div>
+                    <div class="meta-info">
+                        <div class="article-meta-info">
+    <span class="article-date article-meta-item">
+        <i class="fas fa-edit"></i>&nbsp;
+        <span class="pc">2022-12-08 17:40:50</span>
+        <span class="mobile">2022-12-08 17:40</span>
+    </span>
+    
+        <span class="article-categories article-meta-item">
+            <i class="fas fa-folder"></i>&nbsp;
+            <ul>
+                
+                    <li>
+                        <a href="/categories/app%E6%B8%97%E9%80%8F%E6%B5%8B%E8%AF%95/">app渗透测试</a>&nbsp;
+                    </li>
+                
+            </ul>
+        </span>
+    
+    
+
+    
+    
+        <span class="article-wordcount article-meta-item">
+            <i class="fas fa-file-word"></i>&nbsp;<span>1.3k Words</span>
+        </span>
+    
+    
+        <span class="article-min2read article-meta-item">
+            <i class="fas fa-clock"></i>&nbsp;<span>4 Mins</span>
+        </span>
+    
+    
+        <span class="article-pv article-meta-item">
+            <i class="fas fa-eye"></i>&nbsp;<span id="busuanzi_value_page_pv"></span>
+        </span>
+    
+</div>
+
+                    </div>
+                </div>
+            </div>
+        
+
+        <div class="article-content markdown-body">
+            <p>好好去爱，去生活。记住，每天的太阳都是新的，不要辜负了美好的晨光。</p>
+<span id="more"></span>
+
+<hr>
+<h3 id="高-Debuggable-配置检测"><a href="#高-Debuggable-配置检测" class="headerlink" title="[高] Debuggable 配置检测"></a>[高] <strong>Debuggable</strong> 配置检测</h3><h4 id="漏洞描述"><a href="#漏洞描述" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>该项被打开，app 存在被恶意程序调试的风险，可能导致泄露敏感信息等问题。</p>
+<h4 id="测试过程"><a href="#测试过程" class="headerlink" title="测试过程"></a>测试过程</h4><p>查看 <code>AndroidManifest</code> 中的 <code>Debuggable</code> 项。若为<code>True</code>。则存在漏洞。</p>
+<p>漏洞代码段：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490481216-f4ee2eed-07ab-416a-894b-b2b0dccb7d43.png" alt="img"></p>
+<h4 id="漏洞建议"><a href="#漏洞建议" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>不设置 debuggable 选项，或者将其设置成 false，推荐使用后面一种。</p>
+<hr>
+<h3 id="高-allowbackup备份检测"><a href="#高-allowbackup备份检测" class="headerlink" title="[高] allowbackup备份检测"></a>[高] allowbackup备份检测</h3><h4 id="漏洞描述-1"><a href="#漏洞描述-1" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>被测应用的AndroidManifest.xml文件中allowBackup属性值被设置为true，可通过adb backup对应用数据进行备份，在无root的情况下可以导出应用中存储的所有数据，造成用户数据泄露。</p>
+<h4 id="测试过程-1"><a href="#测试过程-1" class="headerlink" title="测试过程"></a>测试过程</h4><p>查看 <code>AndroidManifest</code> 中的 <code>allowBackup</code> 项。若为<code>True</code>。则存在漏洞。    </p>
+<p>无漏洞代码段：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490773932-e9d1d66a-41d3-4a51-ae67-25ffec2c4e29.png" alt="img"></p>
+<h4 id="漏洞建议-1"><a href="#漏洞建议-1" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><ol>
+<li> 将AndroidManifest.xml文件下Allowbackup属性设置为false； </li>
+<li> 使用良好加密，例如启动应用时计算设备唯一标识，从服务端获取对应密钥后解密本地配置。 </li>
+</ol>
+<hr>
+<h3 id="中-危险系统权限使用检测"><a href="#中-危险系统权限使用检测" class="headerlink" title="[中] 危险系统权限使用检测"></a>[中] 危险系统权限使用检测</h3><h4 id="漏洞描述-2"><a href="#漏洞描述-2" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>若 App 如果使用了一些系统限制权限，诸如“android.permission.WRITE_SECURE_SETTINGS” 等，则该 app 应该是设备自带的系统或google 自带的 app，并且应该放置在”/system/app”目录下。否则就是一个恶意 app。</p>
+<h4 id="测试过程-2"><a href="#测试过程-2" class="headerlink" title="测试过程"></a>测试过程</h4><p>检测<code>&lt;uses-permission&gt;</code> 中是否涉及以下权限的申请，若有其中的任何一个存在，则将该扫描项标注为提醒，并将又问题的代码段标注出来。</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. android.permission.WRITE_SETTINGS		#允许程序读取或写入系统设置</span><br><span class="line">2. android.permission.INSTALL_PACKAGES		#允许一个程序安装packages</span><br><span class="line">3. android.permission.MOUNT_FORMAT_FILESYSTEMS		#格式化可移动文件系统，比如格式化清空SD卡</span><br><span class="line">4. android.permission.MOUNT_UNMOUNT_FILESYSTEMS		#允许挂载和反挂载文件系统可移动存储</span><br><span class="line">5. android.permission.RESTART_PACKAGES		#允许程序重新启动其他程序。</span><br><span class="line">注：android.permission.REQUEST_INSTALL_PACKAGES 是新增未知来源安装权限。暂不算危险漏洞</span><br></pre></td></tr></table></figure>
+
+<p>漏洞代码段：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490817669-3b0eb70f-14b0-43ca-afc8-9041cc0fa7f1.png" alt="img"></p>
+<h4 id="漏洞建议-2"><a href="#漏洞建议-2" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>根据业务需求，如非必要，移除这些高级别权限。</p>
+<h4 id="参考链接"><a href="#参考链接" class="headerlink" title="参考链接"></a>参考链接</h4><ul>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/fnlingnzb-learner/p/7239614.html" >Android权限操作之uses-permission详解<i class="fas fa-external-link-alt"></i></a></li>
+<li><a class="link"   target="_blank" rel="noopener" href="https://www.cnblogs.com/ywtk/p/3848205.html" >Android（permission）常用权限<i class="fas fa-external-link-alt"></i></a></li>
+</ul>
+<hr>
+<h3 id="低-非必要权限检测"><a href="#低-非必要权限检测" class="headerlink" title="[低] 非必要权限检测"></a>[低] 非必要权限检测</h3><h4 id="漏洞描述-3"><a href="#漏洞描述-3" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>该权限是使在模拟器中使用，用于获取模拟定位信息。</p>
+<h4 id="测试过程-3"><a href="#测试过程-3" class="headerlink" title="测试过程"></a>测试过程</h4><p>检查是否在正式环境中存在该权限 <code>android permission ACCESS MOCKLOCATION</code>权限</p>
+<p>漏洞代码段：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490852288-f255744b-8df6-4321-bfe3-a5d697a20ec5.png" alt="img"></p>
+<h4 id="漏洞建议-3"><a href="#漏洞建议-3" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>移除 android.permission.ACCESS_MOCK_LOCATION 权限。</p>
+<hr>
+<h3 id="低-PermissionGroup-检测"><a href="#低-PermissionGroup-检测" class="headerlink" title="[低] PermissionGroup 检测"></a>[低] <code>PermissionGroup</code> 检测</h3><h4 id="漏洞描述-4"><a href="#漏洞描述-4" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>PermissionGroup 可以对 permission 进行一个逻辑上的分组。如果PermissionGroup 的属性为空，会导致权限定义无效，且其他app 无法使用该权限</p>
+<h4 id="测试过程-4"><a href="#测试过程-4" class="headerlink" title="测试过程"></a>测试过程</h4><p>查看 <code>PermissionGroup</code> 中的 <code>protectionlevel</code>  属性设置 。</p>
+<p>如果系统使用了<code>PermissionGroup</code>。但<code>protectionlevel</code> 为 <code>normal</code>或 <code>dangerous</code> 或者未设置 <code>protectionLevel</code>。均认为不安全并标注问题的代码段。</p>
+<p>未设置 <code>protectionLevel</code>，默认情况下，<code>permission</code> 的<code>protectionLevel</code> 为 <code>normal</code>。</p>
+<p>漏洞代码段：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490876636-ce7d84ce-3da3-4946-9c8a-ac96ed296d3d.png" alt="img"></p>
+<h4 id="漏洞建议-4"><a href="#漏洞建议-4" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>设置 PermissionGroup 属性值或者不使用 PermissionGroup。</p>
+<hr>
+<h3 id="低-应用中的ProtectionLevel-检测"><a href="#低-应用中的ProtectionLevel-检测" class="headerlink" title="[低] 应用中的ProtectionLevel 检测"></a>[低] 应用中的<code>ProtectionLevel</code> 检测</h3><h4 id="漏洞描述-5"><a href="#漏洞描述-5" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>对 app 的自定义 permission 的 protectionLevel 属性设置不当，会导致组件（如：content provider）数据泄露危险。最好的权限设置应为”signature”或”signatureOrSystem”，进而避免被第三方应用利用。</p>
+<h4 id="测试过程-5"><a href="#测试过程-5" class="headerlink" title="测试过程"></a>测试过程</h4><p>查看应用中的 <code>ProtectionLevel</code> 属性设置 。</p>
+<p>如果应用中的<code>permission</code> 的<code>protectionlevel</code> 为 <code>normal</code>或 <code>dangerous</code> 或者未设置 <code>protectionLevel</code>。均认为不安全并标注问题的代码段。</p>
+<p>未设置 <code>protectionLevel</code>，默认情况下，<code>permission</code> 的<code>protectionLevel</code> 为 <code>normal</code>。</p>
+<p>漏洞代码段：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490904496-193403c9-058d-4e33-8b0c-334f0403aca8.png" alt="img"></p>
+<h4 id="漏洞建议-5"><a href="#漏洞建议-5" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>注意使用”signature”或”signatureOrSystem”防止其他 app 注册或接受该 app 的消息，提高安全性</p>
+<hr>
+<h3 id="低-shareUserid-检测"><a href="#低-shareUserid-检测" class="headerlink" title="[低] shareUserid 检测"></a>[低] shareUserid 检测</h3><h4 id="漏洞描述-6"><a href="#漏洞描述-6" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>通过 sharedUserId，可以让拥有同一个 User Id 的多个 apk 运行在同一个进程中，互相访问任意资源。</p>
+<p>将 sharedUserId 设置为 android.uid.system，可以把 app 放到系统进程中，app 将获得极大的权限。如果 app 同时有 master key漏洞，容易导致被 root</p>
+<h4 id="测试过程-6"><a href="#测试过程-6" class="headerlink" title="测试过程"></a>测试过程</h4><p>先检测 <code>app/build.gradle</code> 中的 <code>minSdkVersion</code>，</p>
+<ul>
+<li>若 &lt;= 19，则说明其运行的系统可能存在 <code>mster key</code> 漏洞（Android 系统 &lt;= 4.4，即 API Level &lt;= 19 存在 master key 漏洞）。此时若sharedUserId 设置为 android.uid.system，则标注为高危漏洞；</li>
+<li>若 minSdkVersion &gt;19 则是提醒</li>
+</ul>
+<p>漏洞代码段：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490929977-5e818416-0054-46d3-8b26-aedc5aade10b.png" alt="img"></p>
+<h4 id="漏洞建议-6"><a href="#漏洞建议-6" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>采用 API 等级高于 19 的系统。若非特殊的需求，一般不会将sharedUserId 设置为 android.uid.system。</p>
+<hr>
+<h3 id="低-app-最低版本检测"><a href="#低-app-最低版本检测" class="headerlink" title="[低] app 最低版本检测"></a>[低] app 最低版本检测</h3><h4 id="漏洞描述-7"><a href="#漏洞描述-7" class="headerlink" title="漏洞描述"></a>漏洞描述</h4><p>攻击者根据版本已知漏洞，对应用进行调试，破解，逆向等相关操作</p>
+<h4 id="测试过程-7"><a href="#测试过程-7" class="headerlink" title="测试过程"></a>测试过程</h4><p>查看 app 所支持的最低版本的系统 api。</p>
+<p>检测<code>app/build.gradle</code> 中的 <code>minSdkVersion</code> 确定 APP 所支持的最低版本的系统 API，对应到相应的 Android 版本上.</p>
+<p>漏洞代码段：</p>
+<p><img src="https://cdn.nlark.com/yuque/0/2022/png/1285900/1670490959853-115ff8d3-547c-401e-b7cd-7c05ec0d3405.png" alt="img"></p>
+<h4 id="漏洞建议-7"><a href="#漏洞建议-7" class="headerlink" title="漏洞建议"></a>漏洞建议</h4><p>罗列出跟最低版本相关的漏洞和 bug，提醒开发者注意自己应用支持的最低版本的系统可能存在的问题。</p>
+
+        </div>
+
+        
+
+        
+
+        
+            <div class="article-nav">
+                
+                    <div class="article-prev">
+                        <a class="prev"
+                           rel="prev"
+                           href="/2022/12/08/2022/Android%E7%BB%84%E4%BB%B6%E5%AE%89%E5%85%A8/"
+                        >
+                            <span class="left arrow-icon flex-center">
+                              <i class="fas fa-chevron-left"></i>
+                            </span>
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">Android组件安全</span>
+                                <span class="post-nav-item">Prev posts</span>
+                            </span>
+                        </a>
+                    </div>
+                
+                
+                    <div class="article-next">
+                        <a class="next"
+                           rel="next"
+                           href="/2022/12/08/2022/apk%E9%80%86%E5%90%91/"
+                        >
+                            <span class="title flex-center">
+                                <span class="post-nav-title-item">apk逆向</span>
+                                <span class="post-nav-item">Next posts</span>
+                            </span>
+                            <span class="right arrow-icon flex-center">
+                              <i class="fas fa-chevron-right"></i>
+                            </span>
+                        </a>
+                    </div>
+                
+            </div>
+        
+
+        
+    </div>
+</div>
+
+
+                
+            </div>
+
+        </div>
+
+        <div class="page-main-content-bottom">
+            <footer class="footer">
+    <div class="info-container">
+        <div class="copyright-info info-item">
+            &copy;
+            
+            2022&nbsp;<i class="fas fa-heart icon-animate"></i>&nbsp;<a href="/">Angleashuaiby</a>
+        </div>
+        
+            <script async  src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+            <div class="website-count info-item">
+                
+                
+            </div>
+        
+        <div class="theme-info info-item">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>&nbsp;|&nbsp;Theme&nbsp;<a class="theme-version" target="_blank" href="https://github.com/XPoet/hexo-theme-keep">Keep v0.0.1</a>
+        </div>
+        
+        
+    </div>
+</footer>
+
+        </div>
+    </div>
+
+    
+        <div class="post-tools">
+            <div class="post-tools-container">
+    <ul class="tools-list">
+        <!-- TOC aside toggle -->
+        
+            <li class="tools-item page-aside-toggle">
+                <i class="fas fa-outdent"></i>
+            </li>
+        
+
+        <!-- go comment -->
+        
+    </ul>
+</div>
+
+        </div>
+    
+
+    <div class="right-bottom-side-tools">
+        <div class="side-tools-container">
+    <ul class="side-tools-list">
+        <li class="tools-item tool-font-adjust-plus flex-center">
+            <i class="fas fa-search-plus"></i>
+        </li>
+
+        <li class="tools-item tool-font-adjust-minus flex-center">
+            <i class="fas fa-search-minus"></i>
+        </li>
+
+        <li class="tools-item tool-expand-width flex-center">
+            <i class="fas fa-arrows-alt-h"></i>
+        </li>
+
+        <li class="tools-item tool-dark-light-toggle flex-center">
+            <i class="fas fa-moon"></i>
+        </li>
+
+        <!-- rss -->
+        
+
+        
+            <li class="tools-item tool-scroll-to-top flex-center">
+                <i class="fas fa-arrow-up"></i>
+            </li>
+        
+
+        <li class="tools-item tool-scroll-to-bottom flex-center">
+            <i class="fas fa-arrow-down"></i>
+        </li>
+    </ul>
+
+    <ul class="exposed-tools-list">
+        <li class="tools-item tool-toggle-show flex-center">
+            <i class="fas fa-cog fa-spin"></i>
+        </li>
+        
+    </ul>
+</div>
+
+    </div>
+
+    
+        <aside class="page-aside">
+            <div class="post-toc-wrap">
+    <div class="post-toc">
+        <ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98-Debuggable-%E9%85%8D%E7%BD%AE%E6%A3%80%E6%B5%8B"><span class="nav-text">[高] Debuggable 配置检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0"><span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B"><span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%BB%BA%E8%AE%AE"><span class="nav-text">漏洞建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%AB%98-allowbackup%E5%A4%87%E4%BB%BD%E6%A3%80%E6%B5%8B"><span class="nav-text">[高] allowbackup备份检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0-1"><span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B-1"><span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%BB%BA%E8%AE%AE-1"><span class="nav-text">漏洞建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%B8%AD-%E5%8D%B1%E9%99%A9%E7%B3%BB%E7%BB%9F%E6%9D%83%E9%99%90%E4%BD%BF%E7%94%A8%E6%A3%80%E6%B5%8B"><span class="nav-text">[中] 危险系统权限使用检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0-2"><span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B-2"><span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%BB%BA%E8%AE%AE-2"><span class="nav-text">漏洞建议</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E5%8F%82%E8%80%83%E9%93%BE%E6%8E%A5"><span class="nav-text">参考链接</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8E-%E9%9D%9E%E5%BF%85%E8%A6%81%E6%9D%83%E9%99%90%E6%A3%80%E6%B5%8B"><span class="nav-text">[低] 非必要权限检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0-3"><span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B-3"><span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%BB%BA%E8%AE%AE-3"><span class="nav-text">漏洞建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8E-PermissionGroup-%E6%A3%80%E6%B5%8B"><span class="nav-text">[低] PermissionGroup 检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0-4"><span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B-4"><span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%BB%BA%E8%AE%AE-4"><span class="nav-text">漏洞建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8E-%E5%BA%94%E7%94%A8%E4%B8%AD%E7%9A%84ProtectionLevel-%E6%A3%80%E6%B5%8B"><span class="nav-text">[低] 应用中的ProtectionLevel 检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0-5"><span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B-5"><span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%BB%BA%E8%AE%AE-5"><span class="nav-text">漏洞建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8E-shareUserid-%E6%A3%80%E6%B5%8B"><span class="nav-text">[低] shareUserid 检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0-6"><span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B-6"><span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%BB%BA%E8%AE%AE-6"><span class="nav-text">漏洞建议</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BD%8E-app-%E6%9C%80%E4%BD%8E%E7%89%88%E6%9C%AC%E6%A3%80%E6%B5%8B"><span class="nav-text">[低] app 最低版本检测</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E6%8F%8F%E8%BF%B0-7"><span class="nav-text">漏洞描述</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%B5%8B%E8%AF%95%E8%BF%87%E7%A8%8B-7"><span class="nav-text">测试过程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%BB%BA%E8%AE%AE-7"><span class="nav-text">漏洞建议</span></a></li></ol></li></ol>
+    </div>
+</div>
+        </aside>
+    
+
+    <div class="image-viewer-container">
+    <img src="">
+</div>
+
+
+    
+        <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+          <span class="search-input-field-pre">
+            <i class="fas fa-keyboard"></i>
+          </span>
+            <div class="search-input-container">
+                <input autocomplete="off"
+                       autocorrect="off"
+                       autocapitalize="off"
+                       placeholder="Search..."
+                       spellcheck="false"
+                       type="search"
+                       class="search-input"
+                >
+            </div>
+            <span class="popup-btn-close">
+                <i class="fas fa-times"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fas fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+
+    
+
+</main>
+
+
+
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/main.js"></script>
+
+<script src="/js/header-shrink.js"></script>
+
+<script src="/js/back2top.js"></script>
+
+<script src="/js/dark-light-toggle.js"></script>
+
+
+
+    
+<script src="/js/local-search.js"></script>
+
+
+
+
+    
+<script src="/js/code-copy.js"></script>
+
+
+
+
+
+<div class="post-scripts">
+    
+        
+<script src="/js/left-side-toggle.js"></script>
+
+<script src="/js/libs/anime.min.js"></script>
+
+<script src="/js/toc.js"></script>
+
+    
+</div>
+
+
+
+</body>
+</html>
